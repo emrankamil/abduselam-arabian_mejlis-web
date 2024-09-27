@@ -30,7 +30,7 @@ export default async function Home({ params: { locale } }: any) {
             locale: locale,
           }}
         />
-        <Catagories />
+        {/* <Catagories /> */}
         <HowItWorks />
         <Products />
       </div>

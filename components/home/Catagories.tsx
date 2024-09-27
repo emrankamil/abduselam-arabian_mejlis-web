@@ -22,7 +22,7 @@ const Catagories = () => {
 
   return (
     <div className="max-w-full h-screen py-16 -my-16 md:px-8">
-      <div className="flex justify-center items-center h-full w-full">
+      <div className="flex flex-wrap-reverse justify-center items-center h-full w-full">
         {/* Images  */}
         <div className="group w-2/3 flex h-full">
           <div

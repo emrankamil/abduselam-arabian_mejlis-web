@@ -34,8 +34,8 @@ export default function Hero({
       <div className="absolute inset-0 bg-gradient-to-tr from-black/100 to-transparent bg-opacity-70 rounded-xl" />
 
       {/* Hero Content */}
-      <div className="relative w-full h-full z-10 flex flex-col justify-center lg:w-2/3 lg:px-24 px-8 py-6 space-y-8">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white leading-snug md:leading-normal">
+      <div className="relative w-full h-full z-10 flex flex-col justify-center md:w-2/3 md:px-8 lg:px-24 px-8 py-6 space-y-8">
+        <h1 className="text-4xl sm:text-6xl text-white leading-snug md:leading-normal">
           Abduselam Arabian Mejlis Manufacturing Experts
         </h1>
         <p className="text-base md:text-lg lg:text-xl text-white">

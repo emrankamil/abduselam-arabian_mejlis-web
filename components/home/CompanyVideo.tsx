@@ -11,22 +11,22 @@ function CompanyVideo() {
   const videoId = "t2LMvk7CKJ0";
 
   return (
-    <div className="w-full h-screen flex items-center justify-center py-4">
-      <div className="relative bg-[url('/video-image.jpg')] bg-cover bg-left h-full w-full">
+    <div className="w-full md:h-screen h-auto aspect-[3/2] flex items-center justify-center py-4">
+      <div className="relative bg-[url('https://plus.unsplash.com/premium_photo-1683121407881-de8a4a1456c3?q=80&w=1660&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-left h-full w-full">
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
-        <div className="absolute bottom-16 left-16 text-white">
-          <h1 className="mb-4 text-disp">{t("watch_video")}</h1>
+        <div className="absolute bottom-4 md:bottom-16 p-2 left-6 sm:left-10 md:left-16 text-white">
+          <h1 className="mb-2 md:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("watch_video")}
+          </h1>
           <div className="flex items-center">
             <div>
               <button
-                onClick={() => {
-                  setVideoVisible(true);
-                }}
-                className="group flex items-center justify-center w-16 h-16 rounded-full border-2 border-white hover:bg-white transition-colors duration-300"
+                onClick={() => setVideoVisible(true)}
+                className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full border-2 border-white hover:bg-white transition-colors duration-300"
               >
                 <svg
-                  className="w-6 h-6 text-white group-hover:text-black transition-colors duration-300"
+                  className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-white group-hover:text-black transition-colors duration-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -36,8 +36,12 @@ function CompanyVideo() {
               </button>
             </div>
             <div className="ml-4">
-              <h3 className="text-bold">CLICK TO WATCH</h3>
-              <h3 className="text-h3">See how it works</h3>
+              <h3 className="font-bold text-xs sm:text-sm md:text-lg lg:text-xl">
+                CLICK TO WATCH
+              </h3>
+              <h3 className="text-xs sm:text-sm md:text-base lg:text-lg">
+                See how it works
+              </h3>
             </div>
           </div>
         </div>
