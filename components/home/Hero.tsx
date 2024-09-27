@@ -1,12 +1,10 @@
 "use client";
 
-import initTranslations from "@/app/i18n";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import Link from "next/link";
-import { useRef } from "react";
 
 export default function Hero({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   params: { locale },
 }: {
   params: { locale: string };
@@ -55,7 +53,7 @@ export default function Hero({
             variant="outline"
             className="px-6 py-4 lg:px-8 lg:py-7 w-full sm:w-48 text-white rounded-full font-semibold border-2 border-white/50 bg-transparent hover:bg-gray-200/20 transition duration-300"
           >
-            LET'S TALK
+            LET&apos;S TALK
           </Button>
         </div>
       </div>

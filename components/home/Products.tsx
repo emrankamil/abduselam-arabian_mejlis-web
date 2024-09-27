@@ -97,7 +97,7 @@ const ProductShowcase = () => {
               <div className="max-w-4xl mx-auto bg-white shadow-lg h-full">
                 {/* Image Section */}
                 <div className="overflow-hidden h-2/3">
-                  <img
+                  <Image
                     src={image}
                     alt="Product"
                     className="w-full h-full object-cover"

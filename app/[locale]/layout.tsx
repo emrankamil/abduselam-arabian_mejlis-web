@@ -27,6 +27,7 @@ export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
+/* eslint-disable react/no-unescaped-entities */
 export default function RootLayout({
   children,
   params: { locale },
@@ -51,7 +52,12 @@ export default function RootLayout({
 
 const i18nNamespaces = ["home", "common"];
 
-async function NavBarWithTranslation({ params: { locale } }: any) {
+async function NavBarWithTranslation({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, resources } = await initTranslations(locale, i18nNamespaces);
 
   return (

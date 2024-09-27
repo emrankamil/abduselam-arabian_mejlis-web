@@ -3,12 +3,9 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
-import Skeleton from "react-loading-skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FaTerminal } from "react-icons/fa";
 import Image from "next/image";
-import { FaPlus } from "react-icons/fa6";
-import { FaTimes } from "react-icons/fa";
 import { faqs } from "@/data/faqs";
 
 import {
@@ -35,9 +32,7 @@ const ContactUs = () => {
   const form: React.RefObject<HTMLFormElement> = useRef(null);
   const [result, showResult] = useState(false);
 
-  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
-
-  const sendEmail = (e: any) => {
+  const sendEmail = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     if (form.current) {
@@ -81,9 +76,9 @@ const ContactUs = () => {
               Contact us and get A free Consultation{" "}
             </p>
             <p>
-              We're here to help! Whether you have questions about our products,
-              need assistance with an order, or just want to say hello, feel
-              free to reach out to us.
+              We&apos;re here to help! Whether you have questions about our
+              products, need assistance with an order, or just want to say
+              hello, feel free to reach out to us.
             </p>
             {/* action="https://formspree.io/f/xayrqznv" method="POST" */}
             <form className="mt-8 space-y-8" ref={form} onSubmit={sendEmail}>
@@ -160,7 +155,7 @@ const ContactUs = () => {
           </div>
 
           {/* Map Image on top of SVG */}
-          <div className="relative z-10 border-4 border-white shadow-lg w-4/5 h-4/5">
+          <div className="relative z-20 border-4 border-white shadow-lg w-4/5 h-4/5">
             <div className="z-10 relative h-full  flex justify-center align-center">
               <iframe
                 src="https://maps.google.com/maps?q=4k Labs&t=&z=13&ie=UTF8&iwloc=&output=embed"

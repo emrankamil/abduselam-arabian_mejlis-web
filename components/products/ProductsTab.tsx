@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/accordion";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
 
 const ProductsTab = () => {
   const [searchTerm, setSearchTerm] = useState("");

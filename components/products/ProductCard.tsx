@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
 
 interface ProductCardProps {
   id: string;
@@ -14,12 +13,13 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
-  id,
   title,
   description,
   image,
   views,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onLikeToggle,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onSaveToggle,
 }) => {
   return (

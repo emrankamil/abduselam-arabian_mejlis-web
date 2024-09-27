@@ -70,6 +70,7 @@ const ProductList: React.FC<{
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleLikeToggle = (id: string) => {
     // const updatedProducts = products.map((product:Product) => {
     //   if (product.id === id) {
@@ -90,6 +91,7 @@ const ProductList: React.FC<{
     // setProducts(updatedProducts);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSaveToggle = (id: string) => {
     // const updatedProducts = products.map((product) => {
     //   if (product.id === id) {
@@ -136,7 +138,7 @@ const ProductList: React.FC<{
         <div className="w-full px-2 sm:px-4 lg:px-8 xl:px-16">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-semibold text-gray-900">
-              Search results for "{search}"
+              Search results for &quot;{search}&quot;
             </h2>
             <a
               href="/products"

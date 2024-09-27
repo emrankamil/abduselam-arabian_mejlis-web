@@ -100,7 +100,9 @@ const Footer = () => {
               className="px-4 py-2 bg-transparent border-b border-white rounded-3xl focus-visible:ring-transparent"
             />
           </div>
-          <p className="mt-2 text-xs">DON'T WORRY, WE DON'T SEND YOU SPAM.</p>
+          <p className="mt-2 text-xs">
+            DON&apos;T WORRY, WE DON&apos;T SEND YOU SPAM.
+          </p>
         </div>
       </div>
       {/* Footer Bottom */}

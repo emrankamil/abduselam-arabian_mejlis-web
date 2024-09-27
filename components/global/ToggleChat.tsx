@@ -30,7 +30,7 @@ const ChatWidget = () => {
           <h3 className="text-lg font-semibold">Chat With us</h3>
           <p className="py-2">
             {" "}
-            👋 Hi, message us with any questions. We're happy to help!
+            👋 Hi, message us with any questions. We&apos;re happy to help!
           </p>
           <Button
             onClick={toggleChat}

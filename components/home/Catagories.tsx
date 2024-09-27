@@ -4,15 +4,14 @@ import { categories } from "@/data/catagories";
 import { Category } from "@/data/catagories";
 import Image from "next/image";
 
-const images = [
-  { src: "/arabic_board.png", alt: "Image 1" },
-  { src: "/gray-logo.png", alt: "Image 2" },
-  { src: "/hero-image.png", alt: "Image 3" },
-];
+// const images = [
+//   { src: "/arabic_board.png", alt: "Image 1" },
+//   { src: "/gray-logo.png", alt: "Image 2" },
+//   { src: "/hero-image.png", alt: "Image 3" },
+// ];
 
 const Catagories = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
-  const [hoveredImage, setHoveredImage] = useState(2);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const getStyle = (index: number) => ({
@@ -117,6 +116,7 @@ const CategoryDetail: React.FC<Category> = ({ name, description }) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ToggleDescription = () => {
   const [isVisible, setIsVisible] = useState(false);
 

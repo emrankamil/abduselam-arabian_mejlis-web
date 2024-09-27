@@ -2,7 +2,7 @@
 
 import { I18nextProvider } from "react-i18next";
 import initTranslations from "@/app/i18n";
-import { createInstance } from "i18next";
+import { createInstance, Resource } from "i18next";
 
 export default function TranslationsProvider({
   children,
@@ -13,7 +13,8 @@ export default function TranslationsProvider({
   children: React.ReactNode;
   locale: string;
   namespaces: string[];
-  resources: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resources: Resource;
 }) {
   const i18n = createInstance();
 

@@ -9,7 +9,12 @@ import Products from "@/components/home/Products";
 
 const i18nNamespaces = ["home"];
 
-export default async function Home({ params: { locale } }: any) {
+export default async function Home({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, resources } = await initTranslations(locale, i18nNamespaces);
 
   return (
@@ -30,7 +35,7 @@ export default async function Home({ params: { locale } }: any) {
             locale: locale,
           }}
         />
-        {/* <Catagories /> */}
+        <Catagories />
         <HowItWorks />
         <Products />
       </div>
