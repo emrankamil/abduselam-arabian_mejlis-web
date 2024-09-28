@@ -6,6 +6,7 @@ import Features from "@/components/home/Features";
 import Catagories from "@/components/home/Catagories";
 import HowItWorks from "@/components/home/HowItWorks";
 import Products from "@/components/home/Products";
+import Testimonial from "@/components/home/Testimonial";
 
 const i18nNamespaces = ["home"];
 
@@ -23,7 +24,7 @@ export default async function Home({
       locale={locale}
       resources={resources}
     >
-      <div className="flex flex-col gap-32 h-full w-full mx-auto">
+      <div className="flex flex-col gap-24 md:gap-32 h-full w-full mx-auto">
         <Hero
           params={{
             locale: locale,
@@ -38,6 +39,7 @@ export default async function Home({
         <Catagories />
         <HowItWorks />
         <Products />
+        <Testimonial />
       </div>
     </TranslationsProvider>
   );

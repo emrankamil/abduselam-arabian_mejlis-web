@@ -20,13 +20,13 @@ const ChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-5 space-y-2 left-5 z-50">
+    <div className="fixed bottom-5 space-y-2 left-5 z-50 max-w-full">
       <div
         className={`w-96 h-96 flex-grow overflow-y-auto no-scrollbar bg-white rounded-xl shadow-3xl flex flex-col transform-all transition-all transition-opacity duration-500 ${
-          isChatOpen ? "translate-y-0 opacity-100" : "opacity-0"
+          isChatOpen ? "translate-y-0 opacity-100" : "opacity-0 hidden"
         }`}
       >
-        <div className=" bg-primary text-white px-4 pt-4 rounded-t-lg ">
+        <div className=" bg-primary text-white px-4 pt-4 rounded-t-lg">
           <h3 className="text-lg font-semibold">Chat With us</h3>
           <p className="py-2">
             {" "}
@@ -99,7 +99,7 @@ const ChatWidget = () => {
         </div>
 
         <div className="mt-6 w-full mx-auto px-4">
-          <h1 className="text-center font-semibold">Instang Answers</h1>
+          <h1 className="text-center font-semibold">Instant Answers</h1>
           <div className="">
             {faqs.map((faq, idx) => (
               <Accordion

@@ -60,12 +60,12 @@ const ProductShowcase = () => {
   };
 
   return (
-    <div id="products" className="mx-auto px-2 md:px-10 w-full">
-      <h3 className="text-xl font-bold text-center mb-6">Products</h3>
+    <div id="products" className="mx-auto px-2 sm:px-10 md:px-16 w-full">
+      <h3 className="text-3xl font-bold text-center mb-6">Products</h3>
       <h2 className="text-4xl text-center mb-8">Magnificent Product from Us</h2>
 
       {/* Category Tabs */}
-      <div className="flex justify-between mb-10 w-full overflow-x-auto whitespace-nowrap">
+      <div className="flex justify-between mb-10 sm:px-2 md:px-10 lg:px-36 overflow-x-auto whitespace-nowrap">
         {Object.keys(products).map((category) => (
           <button
             key={category}
@@ -90,7 +90,9 @@ const ProductShowcase = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className="overflow-hidden transform transition-transform duration-500 px-2 md:px-4 lg:px-6 pt-6 h-96 max-h-1/2"
+            className={`overflow-hidden transform transition-transform duration-500 px-2 md:px-4 lg:px-6 pt-6 h-96 max-h-1/2 ${
+              (index === 2 || index === 3) && "max-md:hidden"
+            } `}
             style={{ transition: "transform 0.5s ease-in-out" }}
           >
             {index === 0 ? (
@@ -101,6 +103,8 @@ const ProductShowcase = () => {
                     src={image}
                     alt="Product"
                     className="w-full h-full object-cover"
+                    width={500}
+                    height={1000}
                   />
                 </div>
 
@@ -149,9 +153,7 @@ const ProductShowcase = () => {
                 alt={`Category ${selectedCategory} image ${index + 1}`}
                 width={500}
                 height={1000}
-                className={`w-full h-full object-cover ${
-                  index === 2 || index === 3 ? "hidden md:block" : ""
-                }`}
+                className={`w-full h-full object-cover `}
               />
             )}
           </div>
