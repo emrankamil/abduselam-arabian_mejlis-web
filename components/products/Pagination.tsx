@@ -13,9 +13,9 @@ import {
 
 import React from "react";
 
-const PaginationComp = ({ pages }: { pages: number }) => {
+const PaginationComp = () => {
   const searchParams = useSearchParams();
-
+  const pages: number = 2;
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   return (

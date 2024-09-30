@@ -59,7 +59,7 @@ const ContactUs = () => {
   return (
     <div className="w-full space-y-6 h-full">
       {/* banner */}
-      <div className="relative bg-[url('/contactus_hero.jpg')] bg-cover bg-center h-[300px]">
+      <div className="relative bg-[url('/contactus_hero.jpg')] bg-cover bg-bottom h-[300px]">
         <div className="absolute inset-0 bg-gray-800 bg-opacity-70" />
         <div className="relative w-full h-full z-10 flex justify-center items-center">
           <h1 className="text-5xl font-semibold text-white text-center leading-normal">

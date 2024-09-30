@@ -16,17 +16,40 @@ import Link from "next/link";
 const ProductsTab = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
-  const handleSearch = (e: { preventDefault: () => void }) => {
+  const handleSearch = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (searchTerm) {
-      router.push(`/products?search=${encodeURIComponent(searchTerm)}`);
+      try {
+        // Make a request to the backend before the redirect
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_ORIGIN
+          }/products/search?q=${encodeURIComponent(searchTerm)}`
+        );
+
+        // Check if the response is ok (status code 200-299)
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const data = await response.json();
+
+        // Log the response from the backend
+        console.log("Search response data:", data);
+
+        // Proceed with the redirection
+        router.push(`/products?q=${encodeURIComponent(searchTerm)}`);
+      } catch (error) {
+        console.error("Error fetching data from the backend:", error);
+      }
     }
   };
 
   return (
-    <section className="w-full flex justify-between p-6 flex-wrap">
+    <section className="w-full flex flex-col-reverse md:flex-row justify-between px-2 sm:p-6 gap-4">
       {/* filter section */}
-      <div className="relative w-1/5 border-2 border-sm rounded-xl px-4">
+      <div className="relative w-full md:w-64 border-2 border-sm rounded-xl px-4 text-center">
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>
@@ -37,20 +60,26 @@ const ProductsTab = () => {
                   width={20}
                   height={20}
                 />
-                <span className="text-sm">Filter</span>
+                <span className="text-sm font-semibold">Filter</span>
               </div>
             </AccordionTrigger>
             <AccordionContent className="absolute top-full left-0 w-full z-10 bg-white border border-gray-200 rounded-md shadow-lg">
               {/* catagory */}
-              <Accordion type="single" collapsible className="px-4">
+              <Accordion
+                type="single"
+                collapsible
+                className="px-4 font-semibold"
+              >
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>Filter By Category</AccordionTrigger>
+                  <AccordionTrigger className="font-semibold">
+                    Filter By Category
+                  </AccordionTrigger>
                   <AccordionContent className="flex flex-col">
                     {categories.map((category) => (
                       <Link
                         key={category.name}
                         href={`${process.env.NEXT_PUBLIC_SERVER_URL}/products?category=${category.name}`}
-                        className=" px-4 my-0.5 py-1 rounded border-2 border-md hover:bg-gray-100 transition-colors"
+                        className=" px-4 my-0.5 py-1.5 rounded-full border-2 border-md hover:bg-gray-200/70 transition-colors"
                       >
                         {category.name}
                       </Link>
@@ -59,15 +88,21 @@ const ProductsTab = () => {
                 </AccordionItem>
               </Accordion>
               {/* tag */}
-              <Accordion type="single" collapsible className="px-4">
+              <Accordion
+                type="single"
+                collapsible
+                className="px-4 font-semibold"
+              >
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>Filter By Tag</AccordionTrigger>
+                  <AccordionTrigger className="font-semibold">
+                    Filter By Tag
+                  </AccordionTrigger>
                   <AccordionContent className="flex flex-col">
                     {tags.map((tag) => (
                       <Link
                         key={tag}
                         href={`${process.env.NEXT_PUBLIC_SERVER_URL}/products?tag=${tag}`}
-                        className=" px-4 my-0.5 py-1 rounded border-2 border-md hover:bg-gray-100 transition-colors"
+                        className=" px-4 my-0.5 py-1.5 rounded-full border-2 border-md hover:bg-gray-200/70 transition-colors"
                       >
                         {tag}
                       </Link>
@@ -82,7 +117,7 @@ const ProductsTab = () => {
       {/* search bar */}
       <form
         onSubmit={handleSearch}
-        className="flex px-4 py-3 border-2 border-sm rounded-xl overflow-hidden w-1/2 mx-auto font-[sans-serif]"
+        className="flex px-4 py-3 border-2 border-sm rounded-xl overflow-hidden w-full md:w-2/5 lg:w-1/2 mx-auto font-[sans-serif]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -102,10 +137,10 @@ const ProductsTab = () => {
       </form>
       {/* sort products */}
       <Link
-        className="w-1/5 border-2 border-sm rounded-xl px-4 flex justify-center items-center"
+        className="w-1/5 border-2 border-sm rounded-xl px-4 flex justify-center items-center max-md:hidden"
         href={`${process.env.NEXT_PUBLIC_SERVER_URL}/products?sort=true`}
       >
-        <span className="text-sm">Sort</span>
+        <span className="text-sm font-semibold">Sort</span>
       </Link>
     </section>
   );

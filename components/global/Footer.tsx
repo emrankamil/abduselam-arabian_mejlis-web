@@ -13,8 +13,8 @@ import { useState } from "react";
 const Footer = () => {
   const [isFocused, setIsFocused] = useState(false);
   return (
-    <footer className="relative w-full overflow-hidden bg-black text-white bg-[url('/footer_bg.jpg')] bg-center bg-cover space-y-6">
-      <div className="absolute inset-0 bg-black bg-opacity-70 rounded-xl" />
+    <footer className="relative w-full overflow-hidden bg-black text-white bg-[url('/footer_bg.png')] bg-center bg-cover space-y-6">
+      <div className="absolute inset-0 bg-gradient-to-r from-[rgba(4,7,16,0.8)] to-[#0F0F0F] bg-opacity-70" />
       {/* Footer content */}
       <div className="relative h-fit px-6 md:px-16 mt-10 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {/* Call us now */}

@@ -22,3 +22,23 @@ html {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* Add this CSS to your file */
+.fade-mask {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-mask-image: linear-gradient(to right, black 60%, transparent 100%);
+  mask-image: linear-gradient(to right, black 60%, transparent 100%);
+}
+
+.fade-mask:hover {
+  white-space: normal;
+  -webkit-mask-image: none;
+  mask-image: none;
+  background-color: white;
+  max-width: none;
+}
