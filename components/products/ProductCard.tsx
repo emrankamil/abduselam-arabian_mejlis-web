@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 interface ProductCardProps {
   id: string;
   title: string;
