@@ -4,12 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const products: { [key: string]: string[] } = {
   Popular: [
+    "/products/popular-2.jpg",
     "/products/popular-1.png",
-    "/products/popular-2.png",
-    "/products/popular-3.png",
+    "/products/popular-3.jpg",
     "/products/popular-2.png",
   ],
   "Arabian Majlis": [
@@ -19,10 +20,10 @@ const products: { [key: string]: string[] } = {
     "/products/popular-4.png",
   ],
   Sofa: [
+    "/products/popular-2.jpg",
     "/products/popular-1.png",
+    "/products/popular-3.jpg",
     "/products/popular-2.png",
-    "/products/popular-3.png",
-    "/products/popular-4.png",
   ],
   Curtains: [
     "/products/popular-1.png",
@@ -62,7 +63,7 @@ const ProductShowcase = () => {
   return (
     <div id="products" className="mx-auto px-2 sm:px-10 md:px-16 w-full">
       <h3 className="text-3xl font-bold text-center mb-6">Products</h3>
-      <h2 className="text-4xl text-center mb-8">Magnificent Product from Us</h2>
+      <h2 className="text-2xl text-center mb-8">Magnificent Product from Us</h2>
 
       {/* Category Tabs */}
       <div className="flex justify-between mb-10 sm:px-2 md:px-10 lg:px-36 overflow-x-auto whitespace-nowrap">
@@ -70,9 +71,7 @@ const ProductShowcase = () => {
           <button
             key={category}
             className={`text-lg font-medium px-4 ${
-              selectedCategory === category
-                ? "text-black border-b-2 border-black"
-                : "text-gray-400"
+              selectedCategory === category ? "text-black" : "text-gray-400"
             } transition-all duration-300 ease-in-out`}
             onClick={() => handleCategoryChange(category)}
           >
@@ -90,9 +89,8 @@ const ProductShowcase = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`overflow-hidden transform transition-transform duration-500 px-2 md:px-4 lg:px-6 pt-6 h-96 max-h-1/2 ${
-              (index === 2 || index === 3) && "max-md:hidden"
-            } `}
+            className={`overflow-hidden transform transition-transform duration-500 px-2 md:px-4 lg:px-6 pt-6 h-[85vh] max-h-2/3 `}
+            // ${ (index === 2 || index === 3) && "max-md:hidden"}
             style={{ transition: "transform 0.5s ease-in-out" }}
           >
             {index === 0 ? (
@@ -103,7 +101,7 @@ const ProductShowcase = () => {
                     src={image}
                     alt="Product"
                     className="w-full h-full object-cover"
-                    width={500}
+                    width={1000}
                     height={1000}
                   />
                 </div>
@@ -151,21 +149,21 @@ const ProductShowcase = () => {
               <Image
                 src={image}
                 alt={`Category ${selectedCategory} image ${index + 1}`}
-                width={500}
+                width={1000}
                 height={1000}
-                className={`w-full h-full object-cover `}
+                className={`w-full h-full object-cover rounded-xl`}
               />
             )}
           </div>
         ))}
       </div>
       <div className="w-full flex justify-center ">
-        <Button
-          variant={"outline"}
-          className="font-semibold px-20 py-6 rounded-xl hover:bg-gray-200 transition duration-300"
+        <Link
+          href="/products"
+          className="font-semibold px-16 py-4 rounded-xl hover:bg-gray-200 transition duration-300 border border-primary"
         >
           SEE MORE
-        </Button>
+        </Link>
       </div>
     </div>
   );

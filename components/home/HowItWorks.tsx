@@ -5,8 +5,8 @@ import { HiBuildingStorefront } from "react-icons/hi2";
 
 const HowItWorks = () => {
   return (
-    <section className="h-screen">
-      <div className="flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+    <section className="">
+      <div className="flex flex-col items-center justify-center px-2 sm:px-10 md:px-16">
         <h2 className="text-3xl font-bold mb-4 text-center">How it works</h2>
         <p className="text-center mb-12 max-w-2xl px-1 sm:px-4">
           Our streamlined process makes it effortless for you to bring luxury
@@ -14,7 +14,7 @@ const HowItWorks = () => {
           and elegance of our products:
         </p>
 
-        <div className="flex flex-col lg:flex-row w-full max-w-6xl justify-center items-center">
+        <div className="flex flex-col lg:flex-row w-full justify-center items-center lg:space-x-6">
           {/* Text Section */}
           <div className="w-full lg:w-3/5 space-y-6 lg:space-y-4 lg:pr-6">
             <div className="bg-white shadow-md rounded-lg sm:p-6 transform transition-transform duration-300 hover:scale-105">
@@ -67,16 +67,14 @@ const HowItWorks = () => {
           </div>
 
           {/* Image Section */}
-          <div className="w-full lg:w-2/5 h-full mt-8 lg:mt-0 hidden lg:block">
-            <div className="rounded-lg overflow-hidden shadow-md h-full">
-              <Image
-                src="/how_it_works.png" // Replace with the correct image source
-                alt="Luxury Sofa Set"
-                width={1000}
-                height={1000}
-                className="object-cover h-full w-full"
-              />
-            </div>
+          <div className="w-full lg:w-2/5 h-auto mt-8 lg:mt-0 ">
+            <Image
+              src="/how_it_works.png"
+              alt="Luxury Sofa Set"
+              width={1000}
+              height={1000}
+              className="object-cover w-full shadow-md rounded-lg overflow-hidden"
+            />
           </div>
         </div>
       </div>

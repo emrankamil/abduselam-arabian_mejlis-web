@@ -18,7 +18,7 @@ export default async function Features({
           <h1 className="text-h2 font-h3_bold py-2">{t("features_title")}</h1>
         </div>
         <div className="flex flex-col md:flex-row space-x-4 space-y-4">
-          <div className="flex text-left text-white mr-2">
+          <div className="flex text-left text-white mr-2 py-6">
             <div className="flex items-center justify-center">
               <Image
                 src={"/svgs/iconic.svg"}

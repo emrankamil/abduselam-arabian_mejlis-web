@@ -9,12 +9,12 @@ const Testimonial = () => {
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           What our Customers Say
         </h2>
-        <p className="mt-4 text-lg text-gray-500">1+ Happy Customers</p>
+        <p className="mt-4 text-lg text-gray-500">1K+ Happy Customers</p>
         <div className="mt-10 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className={`bg-primary text-white rounded-full py-2 px-4 flex text-left items-center space-x-4 ${
+              className={`bg-background border border-primary text-primary rounded-full py-2 px-4 flex text-left items-center space-x-4 ${
                 index == 3 || index == 4 || index == 5
                   ? "lg:relative lg:left-4"
                   : ""

@@ -78,7 +78,7 @@ const ProductsTab = () => {
                     {categories.map((category) => (
                       <Link
                         key={category.name}
-                        href={`${process.env.NEXT_PUBLIC_SERVER_URL}/products?category=${category.name}`}
+                        href={`/products?category=${category.name}`}
                         className=" px-4 my-0.5 py-1.5 rounded-full border-2 border-md hover:bg-gray-200/70 transition-colors"
                       >
                         {category.name}
@@ -101,7 +101,7 @@ const ProductsTab = () => {
                     {tags.map((tag) => (
                       <Link
                         key={tag}
-                        href={`${process.env.NEXT_PUBLIC_SERVER_URL}/products?tag=${tag}`}
+                        href={`/products?tag=${tag}`}
                         className=" px-4 my-0.5 py-1.5 rounded-full border-2 border-md hover:bg-gray-200/70 transition-colors"
                       >
                         {tag}
@@ -138,7 +138,7 @@ const ProductsTab = () => {
       {/* sort products */}
       <Link
         className="w-1/5 border-2 border-sm rounded-xl px-4 flex justify-center items-center max-md:hidden"
-        href={`${process.env.NEXT_PUBLIC_SERVER_URL}/products?sort=true`}
+        href={`/products?sort=true`}
       >
         <span className="text-sm font-semibold">Sort</span>
       </Link>

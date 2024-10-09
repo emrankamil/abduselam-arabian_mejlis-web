@@ -37,8 +37,8 @@ export default async function Home({
           }}
         />
         <Catagories />
-        <HowItWorks />
         <Products />
+        <HowItWorks />
         <Testimonial />
       </div>
     </TranslationsProvider>
