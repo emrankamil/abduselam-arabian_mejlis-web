@@ -158,7 +158,7 @@ const ContactUs = () => {
           <div className="relative z-20 border-4 border-white shadow-lg w-4/5 h-4/5">
             <div className="z-10 relative h-full  flex justify-center align-center">
               <iframe
-                src="https://maps.google.com/maps?q=4k Labs&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.196698176735!2d38.691625574613305!3d9.002650089401673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b87153a980967%3A0x8a391b9f99b47bc3!2sAbduselam%20Curtain%2C%20Mejlis%20%26%20Furniture!5e1!3m2!1sen!2set!4v1728473485532!5m2!1sen!2set"
                 className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg b-0"
                 allowFullScreen={true}
               ></iframe>
