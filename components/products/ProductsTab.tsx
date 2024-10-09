@@ -32,8 +32,8 @@ const ProductsTab = () => {
           throw new Error(`Error: ${response.status}`);
         }
 
-        // Parse the JSON response
-        const data = await response.json();
+        // // Parse the JSON response
+        // const data = await response.json();
 
         // Proceed with the redirection
         router.push(`/products?q=${encodeURIComponent(searchTerm)}`);
