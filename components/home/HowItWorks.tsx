@@ -18,8 +18,8 @@ const HowItWorks = () => {
           {/* Text Section */}
           <div className="w-full lg:w-3/5 space-y-6 lg:space-y-4 lg:pr-6">
             <div className="bg-white shadow-md rounded-lg sm:p-6 transform transition-transform duration-300 hover:scale-105">
-              <div className="flex items-start">
-                <div className="text-2xl pr-2 sm:pr-4">
+              <div className="flex items-center p-2">
+                <div className="text-2xl pr-2 sm:pr-4 ">
                   <FaSearch />
                 </div>
                 <div>
@@ -34,7 +34,7 @@ const HowItWorks = () => {
             </div>
 
             <div className="bg-white shadow-md rounded-lg sm:p-6 transform transition-transform duration-300 hover:scale-105">
-              <div className="flex items-start">
+              <div className="flex items-center p-2">
                 <div className="text-2xl pr-2 sm:pr-4">
                   <GiConfirmed />
                 </div>
@@ -50,7 +50,7 @@ const HowItWorks = () => {
             </div>
 
             <div className="bg-white shadow-md rounded-lg sm:p-6 transform transition-transform duration-300 hover:scale-105">
-              <div className="flex items-start">
+              <div className="flex items-center p-2">
                 <div className="text-2xl pr-2 sm:pr-4">
                   <HiBuildingStorefront />
                 </div>
@@ -67,7 +67,7 @@ const HowItWorks = () => {
           </div>
 
           {/* Image Section */}
-          <div className="w-full lg:w-2/5 h-auto mt-8 lg:mt-0 ">
+          <div className="w-full lg:w-2/5 h-auto mt-8 lg:mt-0 hidden lg:block">
             <Image
               src="/how_it_works.png"
               alt="Luxury Sofa Set"

@@ -35,9 +35,6 @@ const ProductsTab = () => {
         // Parse the JSON response
         const data = await response.json();
 
-        // Log the response from the backend
-        console.log("Search response data:", data);
-
         // Proceed with the redirection
         router.push(`/products?q=${encodeURIComponent(searchTerm)}`);
       } catch (error) {
