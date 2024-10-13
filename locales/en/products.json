@@ -1,0 +1,9 @@
+{
+  "lang": "en",
+  "header": "Products",
+  "search": "Search results for",
+  "all_products": "Return to All Products",
+  "clear_filter": "Clear Filter",
+  "no_products": "No products found",
+  "fetching_error": "Error fetching products"
+}
