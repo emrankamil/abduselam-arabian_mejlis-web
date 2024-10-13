@@ -1,2 +1,13 @@
-{"lang":"", "about_us":"ስለ እኛ","contact_us":"ያግኙን","home":"ዋና ገጽ","products":"ምርቶች", "arabian_mejlis":"አረቢያን መጅሊስ",
-"sofa":"ሶፋ", "beds":"አልጋዎች", "curtain":"መጋረጃ", "tv_stand":"ቲቪ ስታንድ"}
+{
+  "lang": "",
+  "about_us": "ስለ እኛ",
+  "contact_us": "ያግኙን",
+  "home": "ዋና ገጽ",
+  "popular": "ታዋቂ ምርቶቻችን",
+  "products": "ምርቶች",
+  "arabian_mejlis": "አረቢያን መጅሊስ",
+  "sofa": "ሶፋ",
+  "beds": "አልጋዎች",
+  "curtain": "መጋረጃ",
+  "tv_stand": "ቲቪ ስታንድ"
+}

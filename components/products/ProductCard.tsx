@@ -32,7 +32,28 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const [isLiked, setIsLiked] = useState(false);
   const [productLikes, setProductLikes] = useState(likes);
 
+  // useEffect(() => {
+  //   const fetchProduct = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.NEXT_PUBLIC_ORIGIN}/products/${id}`,
+  //         { cache: "no-store" }
+  //       );
+  //       const data = await response.json();
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       setProductLikes(data.data.likes);
+  //     } catch (error) {
+  //       console.error("Error fetching product:", error);
+  //     }
+  //   };
+
+  //   fetchProduct();
+  // }, [id]);
+
   const handleLikeToggle = () => {
+    console.log("handleLikeToggle");
     if (isLiked) {
       handleUnlike(id);
     } else {
@@ -94,7 +115,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   } transition-colors duration-300`}
                 />
               </button>
-              <span className="text-sm">{productLikes}</span>
+              <span className="text-sm">
+                {productLikes !== 0 && productLikes}
+              </span>
             </div>
             <div className="flex items-center space-x-0.5">
               <div>

@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { services } from "@/data/aboutus";
+import LoadingSpinner from "@/components/global/LoadingSpinner";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -36,10 +37,39 @@ export default function Page({ params }: { params: { id: string } }) {
   }, [id]);
 
   if (error) {
-    return <p>Error loading product</p>;
+    return (
+      <div>
+        {/* banner */}
+        <div className="relative bg-[url('/products_hero.png')] bg-cover bg-center h-[300px]">
+          <div className="absolute inset-0 bg-gray-900 bg-opacity-70" />
+          <div className="relative w-full h-full z-10 flex justify-center items-center">
+            <h1 className="text-5xl font-semibold text-white text-center leading-normal">
+              Order Your Product Now
+            </h1>
+          </div>
+        </div>
+        <div className="py-16 ">Error loading product</div>
+      </div>
+    );
   }
   if (!product) {
-    return <p>Loading...</p>;
+    return (
+      <div>
+        {/* banner */}
+        <div className="relative bg-[url('/products_hero.png')] bg-cover bg-center h-[300px]">
+          <div className="absolute inset-0 bg-gray-900 bg-opacity-70" />
+          <div className="relative w-full h-full z-10 flex justify-center items-center">
+            <h1 className="text-5xl font-semibold text-white text-center leading-normal">
+              Order Your Product Now
+            </h1>
+          </div>
+        </div>
+
+        <div className="mx-auto py-6 px-4 ">
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -85,7 +115,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 className="w-full h-48 object-cover rounded-lg"
               />
               <Image
-                src={product.images[2]}
+                src={product.images[2] ? product.images[2] : "/image.png"}
                 alt="Small 2"
                 width={1000}
                 height={1000}

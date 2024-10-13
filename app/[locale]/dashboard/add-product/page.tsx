@@ -54,8 +54,8 @@ const AddProduct = () => {
         product.description.trim().split(/\s+/).length,
         product.description_am.trim().split(/\s+/).length
       );
-      if (wordCount > 13) {
-        setError("Short description must be 13 words or less.");
+      if (wordCount > 10) {
+        setError("Short description must be 10 words or less.");
       } else {
         setError(""); // Clear error if within limit
       }
@@ -128,8 +128,8 @@ const AddProduct = () => {
       product.description.trim().split(/\s+/).length,
       product.description_am.trim().split(/\s+/).length
     );
-    if (wordCount > 13) {
-      setError("Short description must be 13 words or less.");
+    if (wordCount > 10) {
+      setError("Short description must be 10 words or less.");
       return; // Prevent form submission if word limit exceeded
     }
 

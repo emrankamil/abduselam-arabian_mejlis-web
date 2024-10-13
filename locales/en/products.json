@@ -5,5 +5,6 @@
   "all_products": "Return to All Products",
   "clear_filter": "Clear Filter",
   "no_products": "No products found",
-  "fetching_error": "Error fetching products"
+  "fetching_error": "Error fetching products",
+  "best_selling": "Best Selling"
 }

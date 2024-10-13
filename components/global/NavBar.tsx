@@ -41,7 +41,7 @@ const NavBar = () => {
       }
 
       // Change background to solid color once you scroll past navbar height
-      if (currentScrollPos > navbarHeight) {
+      if (currentScrollPos > navbarHeight || isMobileMenuOpen) {
         setBackgroundTransparent(false);
       }
 
@@ -66,7 +66,7 @@ const NavBar = () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [prevScrollpos]);
+  }, [prevScrollpos, isMobileMenuOpen]);
 
   const { t } = useTranslation();
   return (
@@ -177,7 +177,9 @@ const NavBar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`${isMobileMenuOpen ? "" : "hidden"} sm:hidden max-w-full`}
+        className={`${
+          isMobileMenuOpen ? "" : "hidden"
+        } sm:hidden max-w-full text-center`}
         id="mobile-menu"
       >
         <div className="space-y-1 pb-3 pt-2">

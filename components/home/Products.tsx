@@ -5,6 +5,8 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { categories } from "@/data/categoriesData";
 
 const products: { [key: string]: string[] } = {
   Popular: [
@@ -46,6 +48,8 @@ const products: { [key: string]: string[] } = {
 };
 
 const ProductShowcase = () => {
+  const { t } = useTranslation();
+
   const [selectedCategory, setSelectedCategory] =
     useState<keyof typeof products>("Popular");
   const [images, setImages] = useState<string[]>(products[selectedCategory]);
@@ -62,8 +66,10 @@ const ProductShowcase = () => {
 
   return (
     <div id="products" className="mx-auto px-2 sm:px-10 md:px-16 w-full">
-      <h3 className="text-3xl font-bold text-center mb-6">Products</h3>
-      <h2 className="text-2xl text-center mb-8">Magnificent Product from Us</h2>
+      <h3 className="text-3xl font-bold text-center mb-6">
+        {t("home:products")}
+      </h3>
+      <h2 className="text-2xl text-center mb-8">{t("home:products_title")}</h2>
 
       {/* Category Tabs */}
       <div className="flex justify-between mb-10 sm:px-2 md:px-10 lg:px-36 overflow-x-auto whitespace-nowrap">
@@ -75,7 +81,19 @@ const ProductShowcase = () => {
             } transition-all duration-300 ease-in-out`}
             onClick={() => handleCategoryChange(category)}
           >
-            {category}
+            {category === "Arabian Majlis"
+              ? t("common:arabian_mejlis")
+              : category === "Curtains"
+              ? t("common:curtain")
+              : category === "Sofa"
+              ? t("common:sofa")
+              : category === "Beds"
+              ? t("common:beds")
+              : category === "Tv Stand"
+              ? t("common:tv_stand")
+              : category === "Popular"
+              ? t("common:popular")
+              : category}
           </button>
         ))}
       </div>
@@ -94,9 +112,9 @@ const ProductShowcase = () => {
             style={{ transition: "transform 0.5s ease-in-out" }}
           >
             {index === 0 ? (
-              <div className="max-w-4xl mx-auto bg-white shadow-lg h-full">
+              <div className="max-w-4xl mx-auto bg-white shadow-lg h-full flex flex-col">
                 {/* Image Section */}
-                <div className="overflow-hidden h-2/3">
+                <div className="overflow-hidden flex-1">
                   <Image
                     src={image}
                     alt="Product"
@@ -107,24 +125,36 @@ const ProductShowcase = () => {
                 </div>
 
                 {/* Info Section */}
-                <div className="p-1 sm:p-4 flex justify-between h-1/3">
+                <div className="p-1 sm:p-4 flex justify-between">
                   <div className="w-2/3 pr-2 sm:pr-4">
                     {/* Title */}
                     <h2 className="text-2xl sm:text-xl font-bold mb-2 truncate">
-                      Arabian Mejlis
+                      {selectedCategory === "Arabian Majlis"
+                        ? t("common:arabian_mejlis")
+                        : selectedCategory === "Curtains"
+                        ? t("common:curtain")
+                        : selectedCategory === "Sofa"
+                        ? t("common:sofa")
+                        : selectedCategory === "Beds"
+                        ? t("common:beds")
+                        : selectedCategory === "Tv Stand"
+                        ? t("common:tv_stand")
+                        : selectedCategory === "Popular"
+                        ? t("common:popular")
+                        : selectedCategory}
                     </h2>
                     {/* Description */}
                     <p className="text-gray-700 text-base sm:text-sm mb-4 break-words">
-                      Indulge in comfort and style with our premium sofas,
-                      designed to be the centerpiece of your living space.
+                      {t("common:lang") === "en"
+                        ? categories[index].description
+                        : categories[index].description_am}
                     </p>
                   </div>
-
-                  <div className="flex flex-col justify-between w-1/3">
+                  <div className="flex flex-col w-1/3">
                     <div className="text-center">
                       {/* Rating */}
                       <h3 className="text-lg sm:text-base font-bold">
-                        Best Selling
+                        {t("products:best_selling")}
                       </h3>
                       <div className="flex items-center justify-center space-x-1">
                         {[...Array(5)].map((_, i) => (

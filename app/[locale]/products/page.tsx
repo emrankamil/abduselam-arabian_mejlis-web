@@ -5,8 +5,6 @@ import ProductsTab from "@/components/products/ProductsTab";
 import { FetchFunction } from "@/api/FetchFunction";
 import initTranslations from "@/app/i18n";
 
-export const fetchCache = "force-no-store";
-
 const getProductsData = async (searchParams: {
   page: string;
   tag?: string;

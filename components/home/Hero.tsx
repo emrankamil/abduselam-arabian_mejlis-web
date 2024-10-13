@@ -18,7 +18,7 @@ export default function Hero() {
     <div className="relative bg-[url('/hero-image.png')] bg-cover bg-left h-screen w-full">
       {/* Scroll Button */}
       <button
-        className="absolute bottom-5 left-1/2 z-50 transform -translate-x-1/2 p-2"
+        className="absolute bottom-5 left-1/2 z-40 transform -translate-x-1/2 p-2"
         onClick={handleScroll}
       >
         <Image src="/svgs/drag.svg" alt="" width={25} height={25} />
