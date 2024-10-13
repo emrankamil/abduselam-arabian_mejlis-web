@@ -1,1 +1,19 @@
-{"features":"ፊቸሮቻችን","features_title":"ከኛ ምን ያገኛሉ?","header":"አብዱሰላም አረብ መጅሊስ","moto":"እኛ አቅራቢዎች ብቻ ሳንሆን አጋሮችህ ነን","products":"ምርቶች","video_description":"እንዴት እንደሚሰራ ይመልከቱ","watch_video":"አንዳንድ ምርቶቻችንን በቪዲዮ ይመልከቱ"}
+{
+  "features": "ፊቸሮቻችን",
+  "features_title": "ከኛ ምን ያገኛሉ?",
+  "header": "አብድሰላም የመጋረጃና የመጅሊስ ዲዛይነር",
+  "moto": "እኛ አቅራቢዎች ብቻ ሳንሆን አጋሮቾም ጭምር ነን",
+  "products": "ምርቶች",
+  "video_description": "እንዴት እንደሚሰራ ይመልከቱ",
+  "watch_video": "አንዳንድ ምርቶቻችንን በቪዲዮ ይመልከቱ",
+  "best_recommendation": "የሁልጊዜ ተወዳጅ እቃዎቻችን",
+  "categories": "የምርት አይነቶች",
+  "shop_now": "አሁኑኑ ይግዙ",
+  "lets_talk": "ይደውሉ",
+  "feature1_title": "ጥራት",
+  "feature1_description": "የእኛ ፈርኒቸሮች በሙያዉ በተካኑ የእጅ ባለሞያዎች የተሰራ ሲሆን ስራዎቻችን በከፍተኛው የአረቢያ ባህል መሠረት በጥንቃቄ ይሰራሉ እያንዳንዱ ክፍል ለትውልድ የሚዘልቅ የጥበብ ስራ መሆኑንም እናረጋግጣለን።",
+  "feature2_title": "ውበት",
+  "feature2_description": "We provide the best price for our products",
+  "feature3_title": "ምቾት",
+  "feature3_description": "We deliver our products on time"
+}

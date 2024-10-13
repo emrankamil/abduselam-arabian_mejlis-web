@@ -1,5 +1,4 @@
 import ProductCard from "@/components/products/ProductCard";
-import PaginationComp from "@/components/products/Pagination";
 import { Product } from "@/types/productType";
 import ProductsTab from "@/components/products/ProductsTab";
 import { FetchFunction } from "@/api/FetchFunction";
@@ -126,14 +125,16 @@ const AdminProductsPage: React.FC<{
           {products ? (
             products.map((product: Product) => (
               <ProductCard
+                params={{ locale: "en" }}
                 key={product.id}
                 id={product.id}
                 title={product.title}
+                title_am=""
                 description={product.description}
+                description_am=""
                 image={product.images[0]}
                 views={product.views}
-                // onLikeToggle={handleLikeToggle}
-                // onSaveToggle={handleSaveToggle}
+                likes={product.likes}
               />
             ))
           ) : (
@@ -141,8 +142,6 @@ const AdminProductsPage: React.FC<{
           )}
         </div>
       </div>
-
-      {products && <PaginationComp />}
     </section>
   );
 };

@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import i18nConfig from "@/i18nConfig";
 import { dir } from "i18next";
-import { Lato } from "next/font/google";
+import localFont from "next/font/local";
 
 import initTranslations from "../i18n";
 import NavBar from "@/components/global/NavBar";
@@ -11,11 +11,20 @@ import BecomeFamily from "@/components/global/BecomeFamily";
 import Footer from "@/components/global/Footer";
 import ChatWidget from "@/components/global/ToggleChat";
 
-const myFont = Lato({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--my-font-family",
+const playfair = localFont({
+  src: "../fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf",
+  variable: "--font-playfair",
+  weight: "100 900",
+});
+const latoBold = localFont({
+  src: "../fonts/Lato/Lato-Black.ttf",
+  variable: "--font-latoBold",
+  weight: "100 900",
+});
+const latoRegular = localFont({
+  src: "../fonts/Lato/Lato-Regular.ttf",
+  variable: "--font-latoRegular",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
@@ -28,46 +37,37 @@ export function generateStaticParams() {
   return i18nConfig.locales.map((locale) => ({ locale }));
 }
 
-/* eslint-disable react/no-unescaped-entities */
-export default function RootLayout({
+const i18nNamespaces = ["home", "common", "products"];
+
+export default async function RootLayout({
   children,
   params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  return (
-    <html lang={locale} dir={dir(locale)} data-theme="winter">
-      <body className={`${myFont.className} bg-background`}>
-        <div className="">
-          <NavBarWithTranslation params={{ locale }} />
-          {children}
-          <ChatWidget />
-          <BecomeFamily />
-          <Footer />
-        </div>
-      </body>
-    </html>
-  );
-}
-
-const i18nNamespaces = ["home", "common"];
-
-async function NavBarWithTranslation({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, resources } = await initTranslations(locale, i18nNamespaces);
 
   return (
-    <TranslationsProvider
-      namespaces={i18nNamespaces}
-      locale={locale}
-      resources={resources}
-    >
-      <NavBar />
-    </TranslationsProvider>
+    <html lang={locale} dir={dir(locale)} data-theme="winter">
+      <TranslationsProvider
+        namespaces={i18nNamespaces}
+        locale={locale}
+        resources={resources}
+      >
+        <body
+          className={`${latoBold.variable} ${latoRegular.variable} ${playfair.variable} antialiased font-sans bg-background`}
+        >
+          <div className="">
+            <NavBar />
+            {children}
+            <ChatWidget />
+            <BecomeFamily />
+            <Footer />
+          </div>
+        </body>
+      </TranslationsProvider>
+    </html>
   );
 }

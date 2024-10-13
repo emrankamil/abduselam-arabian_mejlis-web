@@ -69,7 +69,6 @@ const NavBar = () => {
   }, [prevScrollpos]);
 
   const { t } = useTranslation();
-
   return (
     <div
       className="navbar"

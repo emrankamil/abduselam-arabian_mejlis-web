@@ -66,22 +66,29 @@ export default function Page({ params }: { params: { id: string } }) {
           <div className="flex flex-col space-y-4">
             <div className="h-64">
               {/* Big Image */}
-              <img
+
+              <Image
                 src={product.images[0]}
-                alt="Large"
+                alt={"Large"}
+                width={1000}
+                height={1000}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               {/* Two Small Images */}
-              <img
+              <Image
                 src={product.images[1]}
                 alt="Small 1"
+                width={1000}
+                height={1000}
                 className="w-full h-48 object-cover rounded-lg"
               />
-              <img
-                src={product.images[1]}
+              <Image
+                src={product.images[2]}
                 alt="Small 2"
+                width={1000}
+                height={1000}
                 className="w-full h-48 object-cover rounded-lg"
               />
             </div>

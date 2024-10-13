@@ -1,9 +1,19 @@
 {
-    "features": "Features",
-    "features_title": "What do we give you?",
-    "header": "Abduselam Arabian Mejlis",
-    "moto": "We are not just suppliers, we are your partners",
-    "products": "Products",
-    "video_description": "See how it works",
-    "watch_video": "Watch some of our products by video"
+  "features": "Features",
+  "features_title": "What do we give you?",
+  "header": "Abduselam Arabian Mejlis and Curtain Designer",
+  "moto": "We are not just suppliers, we are your partners",
+  "products": "Products",
+  "video_description": "See how it works",
+  "watch_video": "Watch some of our products by video",
+  "categories": "Categories",
+  "best_recommendation": "Our best recommendation",
+  "shop_now": "SHOP NOW",
+  "lets_talk": "LET'S TALK",
+  "feature1_title": "Craftsmanship & Quality",
+  "feature1_description": "Our furniture is crafted by skilled artisans who uphold the finest Arabian traditions, ensuring each piece is a work of art that will last for generations.",
+  "feature2_title": "Stylish",
+  "feature2_description": "We provide the best price for our products",
+  "feature3_title": "Comfortable",
+  "feature3_description": "We deliver our products on time"
 }

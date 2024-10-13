@@ -4,9 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "happy-ox-my-organization-emex-868f2096.koyeb.app",
-        port: "",
-        pathname: "/uploads/**",
+        hostname: "**",
       },
     ],
   },

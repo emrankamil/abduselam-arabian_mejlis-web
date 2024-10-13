@@ -7,7 +7,7 @@ html {
 }
 
 .navbar {
-  @apply fixed w-full shadow-md bg-white z-50 px-4 sm:px-6 lg:px-8 transition-all duration-500;
+  @apply fixed w-full shadow-md bg-white z-50 px-4 sm:px-6 lg:px-8 transition-all duration-500 font-latoRegular;
 }
 
 /* add the code bellow */

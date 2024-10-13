@@ -13,7 +13,7 @@ export default function TranslationsProvider({
   children: React.ReactNode;
   locale: string;
   namespaces: string[];
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   resources: Resource;
 }) {
   const i18n = createInstance();

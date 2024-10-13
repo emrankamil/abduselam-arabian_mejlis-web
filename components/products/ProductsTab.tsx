@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { categories, tags } from "@/data/catagories";
+import { categories, tags } from "@/data/categoriesData";
 
 import {
   Accordion,
@@ -75,7 +75,7 @@ const ProductsTab = () => {
                     {categories.map((category) => (
                       <Link
                         key={category.name}
-                        href={`/products?category=${category.name}`}
+                        href={`/products?category=${category.name.toLowerCase()}`}
                         className=" px-4 my-0.5 py-1.5 rounded-full border-2 border-md hover:bg-gray-200/70 transition-colors"
                       >
                         {category.name}
@@ -98,7 +98,7 @@ const ProductsTab = () => {
                     {tags.map((tag) => (
                       <Link
                         key={tag}
-                        href={`/products?tag=${tag}`}
+                        href={`/products?tag=${tag.toLowerCase()}`}
                         className=" px-4 my-0.5 py-1.5 rounded-full border-2 border-md hover:bg-gray-200/70 transition-colors"
                       >
                         {tag}

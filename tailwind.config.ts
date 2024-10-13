@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+       fontFamily: {
+        latoBold: ["var(--font-latoBold)"],
+        latoRegular: ["var(--font-latoRegular)"],
+        playfair: ["var(--font-playfair)"],
+       },
       colors: {
         primary: "#19181D",
         background: "#F5F7F8",
@@ -43,9 +48,9 @@ const config: Config = {
       fontSize: {
         h1: "60px",
         h2: "27px",
-        h3: "16.5px",
+        h3: "20px",
         "h1-desc": "15px",
-        body: "12px",
+        body: "16px",
         caption: "10px",
         disp: "35px",
       },

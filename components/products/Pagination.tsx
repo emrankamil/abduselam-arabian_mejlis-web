@@ -4,7 +4,6 @@ import { useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -13,15 +12,15 @@ import {
 
 import React from "react";
 
-const PaginationComp = () => {
+const PaginationComp = ({ pages }: { pages: number }) => {
   const searchParams = useSearchParams();
-  const pages: number = 2;
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   return (
     <div>
       <Pagination>
         <PaginationContent>
+          {/* prev */}
           <PaginationItem>
             <PaginationPrevious
               className={`${currentPage === 1 && "active:bg-white opacity-60"}`}
@@ -29,75 +28,18 @@ const PaginationComp = () => {
             />
           </PaginationItem>
 
-          {currentPage === 1 && (
-            <>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${currentPage + 1}`}>
-                  {currentPage + 1}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${currentPage + 2}`}>
-                  {currentPage + 2}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-            </>
-          )}
-          {currentPage > 1 && currentPage < pages && (
-            <>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${currentPage - 1}`}>
-                  {currentPage - 1}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  {currentPage}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${currentPage + 1}`}>
-                  {currentPage + 1}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-            </>
-          )}
-          {currentPage === pages && currentPage !== 1 && (
-            <>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${currentPage - 2}`}>
-                  {currentPage - 2}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${currentPage - 1}`}>
-                  {currentPage - 1}
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  {currentPage}
-                </PaginationLink>
-              </PaginationItem>
-            </>
-          )}
+          {Array.from({ length: pages }, (_, index) => (
+            <PaginationItem key={index}>
+              <PaginationLink
+                href={`?page=${index + 1}`}
+                isActive={currentPage === index + 1}
+              >
+                {index + 1}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+
+          {/* next */}
           <PaginationItem>
             <PaginationNext
               className={`${
