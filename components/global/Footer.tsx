@@ -20,8 +20,18 @@ const Footer = () => {
         {/* Call us now */}
         <div className="px-2 md:px-10 text-left">
           <h3 className="text-xl font-semibold mb-4">Call us now</h3>
-          <p className="mb-2">Office telephone: 090909090909</p>
-          <p>Office telephone: 090909090909</p>
+          <p className="mb-2">
+            Office telephone:{" "}
+            <a href="tel:+251910583763" className="hover:underline">
+              0910583763
+            </a>
+          </p>
+          <p>
+            Whatsapp number:{" "}
+            <a href="tel:+251911822034" className="hover:underline">
+              0911822034
+            </a>
+          </p>
         </div>
 
         {/* Visit us */}
@@ -34,8 +44,18 @@ const Footer = () => {
         {/* Send a message */}
         <div className="px-2 md:px-10 text-left">
           <h3 className="text-xl font-semibold mb-4">Send a message</h3>
-          <p>Email: abduselam@gmail.com</p>
-          <p>Inquiries: support@chaos.com</p>
+          <p>
+            Email:{" "}
+            <a href="mailto:abduselam.mc@gmail.com" className="hover:underline">
+              abduselam.mc@gmail.com
+            </a>
+          </p>
+          <p>
+            Inquiries:{" "}
+            <a href="mailto:abduselam.mc@gmail.com" className="hover:underline">
+              abduselam.mc@gmail.com
+            </a>
+          </p>
         </div>
 
         <div className="pr-2 md:pr-10">
@@ -88,16 +108,36 @@ const Footer = () => {
         </div>
       </div>
       <div className="relative px-6 md:px-16 mt-6 flex space-x-4 px-10">
-        <a href="#" aria-label="Facebook">
+        <a
+          href="https://www.facebook.com/AbduselamMC?mibextid=2JQ9oc"
+          aria-label="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaSquareFacebook fontSize={40} />
         </a>
-        <a href="#" aria-label="Instagram">
+        <a
+          href="https://instagram.com/abduselam.mc"
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <AiFillInstagram fontSize={40} />
         </a>
-        <a href="#" aria-label="TikTok">
+        <a
+          href="tiktok.com/@abduselam_mc"
+          aria-label="TikTok"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <AiFillTikTok fontSize={40} />
         </a>
-        <a href="#" aria-label="Telegram">
+        <a
+          href="https://t.me/Abduselam_MC"
+          aria-label="Telegram"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaTelegram fontSize={40} />
         </a>
       </div>
@@ -105,7 +145,8 @@ const Footer = () => {
       {/* Footer Bottom */}
       <div className="relative flex flex-col sm:flex-row justify-between items-center w-full text-center py-4 bg-black bg-opacity-50 text-sm">
         <p className=" whitespace-nowrap sm:ml-6 md:ml-16">
-          EMEX TEMPLATE©ALL RIGHTS RESERVED - 2024
+          WebCore Software Design and Development©ALL RIGHTS RESERVED -{" "}
+          {new Date().getFullYear()}
         </p>
         <div className="mt-2 md:mt-0 space-x-4 flex-nowrap sm:mr-6 md:mr-16">
           <Link href="/" className="hover:underline">
