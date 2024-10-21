@@ -6,12 +6,15 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaTelegram } from "react-icons/fa6";
 import { AiFillTikTok } from "react-icons/ai";
 import { Input } from "@/components/ui/input";
+import { useTranslation } from "react-i18next";
 
 import Link from "next/link";
 import { useState } from "react";
 
 const Footer = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const { t } = useTranslation();
+
   return (
     <footer className="relative w-full overflow-hidden bg-black text-white bg-[url('/footer_bg.png')] bg-center bg-cover space-y-6">
       <div className="absolute inset-0 bg-gradient-to-r from-[rgba(4,7,16,0.8)] to-[#0F0F0F] bg-opacity-70" />
@@ -19,15 +22,15 @@ const Footer = () => {
       <div className="relative h-fit px-6 md:px-16 mt-10 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {/* Call us now */}
         <div className="px-2 md:px-10 text-left">
-          <h3 className="text-xl font-semibold mb-4">Call us now</h3>
+          <h3 className="text-xl font-semibold mb-4">{t("common:call_us")}</h3>
           <p className="mb-2">
-            Office telephone:{" "}
+            {t("common:office_tel")}:{" "}
             <a href="tel:+251910583763" className="hover:underline">
               0910583763
             </a>
           </p>
           <p>
-            Whatsapp number:{" "}
+            {t("common:whatsapp_num")}:{" "}
             <a href="tel:+251911822034" className="hover:underline">
               0911822034
             </a>
@@ -36,22 +39,26 @@ const Footer = () => {
 
         {/* Visit us */}
         <div className="px-2 md:px-10 text-left">
-          <h3 className="text-xl font-semibold mb-4">Come visit us</h3>
-          <p>Betel, Addis Ababa</p>
-          <p>Merkato, Addis Ababa</p>
+          <h3 className="text-xl font-semibold mb-4">
+            {t("common:come_visit_us")}
+          </h3>
+          <p>{t("common:betel")}</p>
+          <p>{t("common:merkato")}</p>
         </div>
 
         {/* Send a message */}
         <div className="px-2 md:px-10 text-left">
-          <h3 className="text-xl font-semibold mb-4">Send a message</h3>
+          <h3 className="text-xl font-semibold mb-4">
+            {t("common:send_message")}
+          </h3>
           <p>
-            Email:{" "}
+            {t("common:email")}:{" "}
             <a href="mailto:abduselam.mc@gmail.com" className="hover:underline">
               abduselam.mc@gmail.com
             </a>
           </p>
           <p>
-            Inquiries:{" "}
+            {t("common:inquiries")}:{" "}
             <a href="mailto:abduselam.mc@gmail.com" className="hover:underline">
               abduselam.mc@gmail.com
             </a>
@@ -68,18 +75,15 @@ const Footer = () => {
                 height={200}
               />
             </div>
-            <p className="">
-              We specialize in crafting luxurious Arabian-inspired furniture and
-              decor. With a commitment to quality and authenticity.
-            </p>
+            <p className="">{t("common:footer_text")}</p>
           </div>
         </div>
 
         {/* work hours */}
         <div className=" text-left px-2 md:px-10">
-          <h4 className="my-6 font-semibold">Hours work</h4>
-          <p>Monday to Friday: 08:00 AM - 17:00 PM</p>
-          <p>Saturday: 08:00 AM - 12:00 PM</p>
+          <h4 className="my-6 font-semibold">{t("common:work_hours")}</h4>
+          <p>{t("common:mon_to_fri")}</p>
+          <p>{t("common:sat")}</p>
         </div>
 
         {/* subscribe */}
@@ -91,7 +95,7 @@ const Footer = () => {
                 : "bg-transparent text-white"
             }`}
           >
-            Subscribe now
+            {t("common:subscribe_now")}
           </button>
           <div className="mt-4 flex justify-center items-center">
             <Input
@@ -150,16 +154,16 @@ const Footer = () => {
         </p>
         <div className="mt-2 md:mt-0 space-x-4 flex-nowrap sm:mr-6 md:mr-16">
           <Link href="/" className="hover:underline">
-            HOME
+            {t("common:home")}
           </Link>
           <Link href="/products" className="hover:underline">
-            PRODUCTS
+            {t("common:products")}
           </Link>
           <Link href="/abou" className="hover:underline">
-            ABOUT
+            {t("common:about_us")}
           </Link>
           <Link href="/contact_us" className="hover:underline">
-            CONTACT US
+            {t("common:contact_us")}
           </Link>
         </div>
       </div>

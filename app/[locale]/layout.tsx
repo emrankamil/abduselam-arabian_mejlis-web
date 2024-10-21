@@ -63,7 +63,11 @@ export default async function RootLayout({
             <NavBar />
             {children}
             <ChatWidget />
-            <BecomeFamily />
+            <BecomeFamily
+              params={{
+                locale: locale,
+              }}
+            />
             <Footer />
           </div>
         </body>

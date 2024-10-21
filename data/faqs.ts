@@ -36,4 +36,16 @@ export const faqs: {
     answer_am:
       "አዎ፣ የተመቾት የቤት እቃዎች ዲዛይን ወይም ፎቶ ካለዎት እኛ ዘንድ ይዘው መምጣት ይችለሉ። በመረጡት ዲዛይንም ሰርተን እራስረክባችኋለን።",
   },
+  {
+    question: "Do you provide delivery services?",
+    answer: "Yes, we offer delivery for all our products except curtains.",
+    question_am: " የ ዴሊቨሪ አገልግሎት ትሰጣላቹ?",
+    answer_am: "ከመጋረጃ በስተቀር የገዙትን እቃ ቤቶ ድረስ በከፍተኛ ጥንቃቄ እናደርሳለን።",
+  },
+  {
+    question: "Do you provide delivery services?",
+    answer: "Yes, we offer delivery for all our products except curtains.",
+    question_am: " የ ዴሊቨሪ አገልግሎት ትሰጣላቹ?",
+    answer_am: "ከመጋረጃ በስተቀር የገዙትን እቃ ቤቶ ድረስ በከፍተኛ ጥንቃቄ እናደርሳለን።",
+  },
 ];

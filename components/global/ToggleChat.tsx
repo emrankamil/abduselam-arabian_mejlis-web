@@ -8,6 +8,7 @@ import { FaTimes } from "react-icons/fa";
 import Picker from "emoji-picker-react";
 import { EmojiStyle } from "emoji-picker-react";
 import { useTranslation } from "react-i18next";
+import { IoChevronBack } from "react-icons/io5";
 
 const ChatWidget = () => {
   const { t } = useTranslation();
@@ -124,13 +125,10 @@ const ChatWidget = () => {
           <h3 className="text-lg font-semibold font-playfair">
             {t("common:chat_with_us")}
           </h3>
-          <p className="py-2">
-            {" "}
-            👋 Hi, message us with any questions. We&apos;re happy to help!
-          </p>
+          <p className="py-2"> 👋 {t("common:message_us")}</p>
           <Button
             onClick={toggleChat}
-            className="absolute text-sm top-0 right-0 hover:bg-transparent"
+            className="absolute text-sm top-0 right-0 bg-transparent"
           >
             <FaTimes />
           </Button>
@@ -144,10 +142,11 @@ const ChatWidget = () => {
           ) : (
             <Button
               variant="secondary"
-              className="border border-md border-gray-200/70 rounded mb-2 min-w-full px-2 "
+              className=" mb-2 px-0"
               onClick={returnToQuestionList}
             >
-              Return to Instant Answers
+              <IoChevronBack fontSize={20} />{" "}
+              <h1 className="px-2"> {t("common:instant_answers")}</h1>
             </Button>
           )}
         </div>
@@ -157,7 +156,7 @@ const ChatWidget = () => {
           {!selectedQuestion ? (
             <div className="mt-6 w-full mx-auto px-4 w-full">
               <h1 className="text-center font-semibold font-playfair">
-                Instant Answers
+                {t("common:instant_answers")}
               </h1>
               <div className="">
                 {faqs.map((faq, idx) => (
