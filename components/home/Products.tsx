@@ -72,7 +72,7 @@ const ProductShowcase = () => {
       <h2 className="text-2xl text-center mb-8">{t("home:products_title")}</h2>
 
       {/* Category Tabs */}
-      <div className="flex justify-between mb-10 sm:px-2 md:px-10 lg:px-36 overflow-x-auto whitespace-nowrap">
+      <div className="flex justify-between mb-10 sm:px-2 md:px-10 lg:px-36 overflow-x-auto whitespace-nowrap font-latoRegular">
         {Object.keys(products).map((category) => (
           <button
             key={category}
@@ -128,7 +128,7 @@ const ProductShowcase = () => {
                 <div className="p-1 sm:p-4 flex justify-between">
                   <div className="w-2/3 pr-2 sm:pr-4">
                     {/* Title */}
-                    <h2 className="text-2xl sm:text-xl font-bold mb-2 truncate">
+                    <h2 className="text-2xl sm:text-xl font-bold mb-2 truncate ">
                       {selectedCategory === "Arabian Majlis"
                         ? t("common:arabian_mejlis")
                         : selectedCategory === "Curtains"
@@ -144,7 +144,7 @@ const ProductShowcase = () => {
                         : selectedCategory}
                     </h2>
                     {/* Description */}
-                    <p className="text-gray-700 text-base sm:text-sm mb-4 break-words">
+                    <p className="text-gray-700 text-base sm:text-sm mb-4 break-words font-latoRegular">
                       {t("common:lang") === "en"
                         ? categories[index].description
                         : categories[index].description_am}
@@ -168,7 +168,7 @@ const ProductShowcase = () => {
 
                     {/* Show Details Button */}
                     <div className="flex items-center justify-center">
-                      <Button className="bg-black text-white px-1 sm:px-4 py-2 rounded-xl hover:bg-gray-800 transition duration-300 text-xs sm:text-sm">
+                      <Button className="bg-black text-white px-1 sm:px-4 py-2 rounded-xl hover:bg-gray-800 transition duration-300 text-xs sm:text-sm font-latoRegular">
                         SHOW DETAILS
                       </Button>
                     </div>

@@ -28,7 +28,7 @@ const latoRegular = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Abduselam Arabian Mejlis",
+  title: "Abduselam Curtain, Mejlis and Furniture",
   description:
     "Abduselam Arabian Mejlis Manufacturing Experts. We are not just suppliers, we are your partners",
 };

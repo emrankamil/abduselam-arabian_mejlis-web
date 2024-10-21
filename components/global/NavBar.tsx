@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import LanguageChanger from "./LanguageChanger";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { MdOutlineLocationOn } from "react-icons/md";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -157,19 +158,13 @@ const NavBar = () => {
             </div>
           </div>
 
-          <div className="flex items-center px-2 space-x-6">
-            <div>
-              <Image
-                src={
-                  backgroundTransparent
-                    ? "/svgs/location-pin-white.svg"
-                    : "/svgs/location-pin-black.svg"
-                }
-                alt={"location-pin"}
-                width="20"
-                height="20"
-              />
-            </div>
+          <div className="flex items-center px-2 space-x-4 ">
+            {/* <Link href={"/account"} className="hidden sm:block">
+              <LiaUser fontSize={27} fontWeight={400} />
+            </Link> */}
+            <Link href={"#"} className="hidden sm:block">
+              <MdOutlineLocationOn fontSize={23} />
+            </Link>
             <LanguageChanger />
           </div>
         </div>
@@ -195,6 +190,19 @@ const NavBar = () => {
           <Link href="/about_us" className=" block px-3 py-2 text-base">
             {t("common:about_us")}
           </Link>
+          <Link
+            href={"#"}
+            className="block px-3 py-2 text-base flex items-center justify-center"
+          >
+            <MdOutlineLocationOn fontSize={23} />
+            Our Shops
+          </Link>
+          {/* <Link
+            href={"/account"}
+            className="block px-3 py-2 text-base flex items-center justify-center"
+          >
+            <LiaUser fontSize={27} fontWeight={400} /> Account
+          </Link> */}
         </div>
       </div>
     </div>

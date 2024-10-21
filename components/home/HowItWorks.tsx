@@ -1,17 +1,24 @@
+import initTranslations from "@/app/i18n";
 import Image from "next/image";
 import { FaSearch } from "react-icons/fa";
 import { GiConfirmed } from "react-icons/gi";
 import { HiBuildingStorefront } from "react-icons/hi2";
 
-const HowItWorks = () => {
+const HowItWorks = async ({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) => {
+  const { t } = await initTranslations(locale, ["home"]);
+
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center px-2 sm:px-10 md:px-16">
-        <h2 className="text-3xl font-bold mb-4 text-center">How it works</h2>
-        <p className="text-center mb-12 max-w-2xl px-1 sm:px-4">
-          Our streamlined process makes it effortless for you to bring luxury
-          into your home. Follow these simple steps to experience the quality
-          and elegance of our products:
+        <h2 className="text-3xl font-bold mb-4 text-center">
+          {t("how_it_works")}
+        </h2>
+        <p className="text-center mb-12 max-w-2xl px-1 sm:px-4 font-latoRegular">
+          {t("how_it_works_description")}
         </p>
 
         <div className="flex flex-col lg:flex-row w-full justify-center items-center lg:space-x-6">
@@ -23,11 +30,11 @@ const HowItWorks = () => {
                   <FaSearch />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-2">Browse and Select</h3>
-                  <p>
-                    Explore our curated collection of premium Majlis, sofas,
-                    beds, and curtains. Choose the perfect pieces that reflect
-                    your taste and meet your needs.
+                  <h3 className="text-lg font-bold mb-2">
+                    {t("browse_and_select")}
+                  </h3>
+                  <p className="font-latoRegular">
+                    {t("browse_and_select_content")}
                   </p>
                 </div>
               </div>
@@ -39,11 +46,11 @@ const HowItWorks = () => {
                   <GiConfirmed />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-2">Book and Confirm</h3>
-                  <p>
-                    Once you’ve made your selection, book your items through our
-                    seamless online process. You’ll receive a confirmation and
-                    all the details you need for the next steps.
+                  <h3 className="text-lg font-bold mb-2">
+                    {t("book_and_confirm")}
+                  </h3>
+                  <p className="font-latoRegular">
+                    {t("book_and_confirm_content")}
                   </p>
                 </div>
               </div>
@@ -55,12 +62,8 @@ const HowItWorks = () => {
                   <HiBuildingStorefront />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold mb-2">Arrive at Our Shop</h3>
-                  <p>
-                    Visit our shop to complete your purchase. Experience the
-                    quality firsthand, finalize your order, and take home the
-                    luxurious pieces that will elevate your living space.
-                  </p>
+                  <h3 className="text-lg font-bold mb-2">{t("arrive")}</h3>
+                  <p className="font-latoRegular">{t("arrive_content")}</p>
                 </div>
               </div>
             </div>

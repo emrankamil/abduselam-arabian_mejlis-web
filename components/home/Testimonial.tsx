@@ -4,7 +4,7 @@ import React from "react";
 
 const Testimonial = () => {
   return (
-    <div className="bg-white py-10 md:py-16 px-6 sm:px-16">
+    <div className="bg-white px-6 sm:px-16">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           What our Customers Say

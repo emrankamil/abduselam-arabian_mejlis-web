@@ -135,7 +135,7 @@ const ContactUs = () => {
               className="border border-md border-gray-800/70 rounded-xl my-8 min-w-lg px-6"
             >
               <AccordionItem value="item-1">
-                <AccordionTrigger>{faq.title}</AccordionTrigger>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent className="">{faq.answer}</AccordionContent>
               </AccordionItem>
             </Accordion>

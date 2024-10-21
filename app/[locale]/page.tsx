@@ -22,7 +22,11 @@ export default function Home({
       />
       <Catagories />
       <Products />
-      <HowItWorks />
+      <HowItWorks
+        params={{
+          locale: locale,
+        }}
+      />
       <Testimonial />
     </div>
   );

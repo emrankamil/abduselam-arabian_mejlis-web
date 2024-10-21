@@ -3,15 +3,6 @@ import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
-async function getUser(email: string, password: string): Promise<any> {
-  return {
-    id: 1,
-    name: "test user",
-    email: email,
-    password: password,
-  };
-}
-
 export const {
   auth,
   signIn,
@@ -19,6 +10,14 @@ export const {
   handlers: { GET, POST },
 } = NextAuth({
   ...authConfig,
+  pages: {
+    signIn: "/account/signin",
+  },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  debug: false,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -30,13 +29,36 @@ export const {
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(credentials) {
-        const user = await getUser(
-          credentials.email as string,
-          credentials.password as string
-        );
+      async authorize(credentials: any, req) {
+        if (!credentials.email || !credentials.password) {
+          return null; // Return null for missing credentials, instead of throwing an error.
+        }
 
-        return user ?? null;
+        const { email, password } = credentials;
+
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}login`,
+            {
+              method: "POST",
+              body: JSON.stringify({ email, password }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          if (res.status !== 200) {
+            return null;
+          }
+
+          const user = await res.json();
+
+          if (res.ok && user) {
+            return user as any;
+          }
+        } catch (error) {
+          return null;
+        }
       },
     }),
   ],

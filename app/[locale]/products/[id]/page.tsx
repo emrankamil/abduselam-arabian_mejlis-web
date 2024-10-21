@@ -10,14 +10,25 @@ import {
 } from "@/components/ui/accordion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { services } from "@/data/aboutus";
 import LoadingSpinner from "@/components/global/LoadingSpinner";
+import Slider from "@/components/products/Slider";
+import ProductCard from "@/components/products/ProductCard";
+import { LuPackage } from "react-icons/lu";
+import { MdOutlinePayment } from "react-icons/md";
+import { TbTruckDelivery } from "react-icons/tb";
+import { FaExchangeAlt } from "react-icons/fa";
+import BookingFormModal from "@/components/products/BookProductCard";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params;
 
   const [product, setProduct] = useState<Product | null>(null);
+  const [popularProduct, setPopularProduct] = useState<Product[]>([]);
   const [error, setError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,7 +44,21 @@ export default function Page({ params }: { params: { id: string } }) {
       }
     };
 
+    const fetchPopularProduct = async () => {
+      const response = await FetchFunction<{
+        success: boolean;
+        message: string;
+        data: Product[];
+      }>(`${process.env.NEXT_PUBLIC_ORIGIN}/products?tag=popular`);
+      if (response.success) {
+        setPopularProduct(response.data.slice(0, 4));
+      } else {
+        setError(true);
+      }
+    };
+
     fetchProduct();
+    fetchPopularProduct();
   }, [id]);
 
   if (error) {
@@ -73,33 +98,40 @@ export default function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="">
+    <div className="font-latoRegular">
       {/* banner */}
       <div className="relative bg-[url('/products_hero.png')] bg-cover bg-center h-[300px]">
         <div className="absolute inset-0 bg-gray-900 bg-opacity-70" />
         <div className="relative w-full h-full z-10 flex justify-center items-center">
-          <h1 className="text-5xl font-semibold text-white text-center leading-normal">
+          <h1 className="text-5xl font-semibold text-white text-center leading-normal font-playfair">
             Order Your Product Now
           </h1>
         </div>
       </div>
 
       {error && <p>Error loading product</p>}
-      {!product && (
-        <div className="container mx-auto py-12 px-4">Loading ....</div>
+      {!product && <div className="mx-auto py-12 px-4">Loading ....</div>}
+
+      {isModalOpen && (
+        <BookingFormModal productId={product.id} onClose={closeModal} />
       )}
 
       {/* product */}
-      <div className="container mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="mx-auto py-12 px-6 sm:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Column 1: Images */}
           <div className="flex flex-col space-y-4">
-            <div className="h-64">
+            <h2 className="text-4xl font-bold block md:hidden font-playfair">
+              {product.title.toUpperCase()}
+            </h2>
+            <p className="text-gray-600 block md:hidden">
+              {product.description}
+            </p>
+            <div className="w-full aspect-[1/1]">
               {/* Big Image */}
-
               <Image
                 src={product.images[0]}
-                alt={"Large"}
+                alt={product.description}
                 width={1000}
                 height={1000}
                 className="w-full h-full object-cover rounded-lg"
@@ -109,37 +141,47 @@ export default function Page({ params }: { params: { id: string } }) {
               {/* Two Small Images */}
               <Image
                 src={product.images[1]}
-                alt="Small 1"
+                alt={product.description}
                 width={1000}
                 height={1000}
-                className="w-full h-48 object-cover rounded-lg"
+                className="w-full h-64 object-cover rounded-lg"
               />
               <Image
                 src={product.images[2] ? product.images[2] : "/image.png"}
-                alt="Small 2"
+                alt={product.description}
                 width={1000}
                 height={1000}
-                className="w-full h-48 object-cover rounded-lg"
+                className="w-full h-64 object-cover rounded-lg"
               />
+            </div>
+            {/* slider */}
+            <div>
+              <Slider imageUrls={product.images.slice().reverse()} />
             </div>
           </div>
 
           {/* Column 2: Information */}
-          <div className="flex flex-col justify-center space-y-4">
-            <h2 className="text-4xl font-bold text-gray-800">
+          <div className="flex flex-col space-y-4">
+            <h2 className="text-4xl font-bold  font-playfair hidden md:block">
               {product.title.toUpperCase()}
             </h2>
-            <p className="text-gray-600">{product.description}</p>
-            {/* <div className="flex flex-wrap justify-center gap-4">
-              {colors.map((color, index) => (
-                <div
-                  key={index}
-                  style={{ backgroundColor: color }}
-                  className="w-12 h-12 rounded-full p-4 border border-gray-900 cursor-pointer"
-                />
-              ))}
-            </div> */}
+            <p className="text-gray-600 hidden md:block">
+              {product.description}
+            </p>
+            <button
+              className="my-10 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/70 transition"
+              onClick={openModal}
+            >
+              Book Now
+            </button>
+            <div>
+              <h3 className="text-xl font-semibold ">
+                {product.long_description}
+              </h3>
+            </div>
             <div className="space-y-2">
+              <h3 className="text-xl font-semibold ">Features</h3>
+
               {product.features.map((feature, index) => (
                 <div key={index} className="flex items-center">
                   <svg
@@ -160,28 +202,75 @@ export default function Page({ params }: { params: { id: string } }) {
                 </div>
               ))}
             </div>
-            <button className="mt-4 bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/70 transition">
-              Book Now
-            </button>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex">
+                    <LuPackage className="h-8 w-8 text-primary-600 mr-4" />
+                    <div className="text-left">
+                      <h3 className="text-lg font-latoBold">PACKAGING</h3>
+                      <h2>Luxury & Ecological Packaging</h2>
+                    </div>
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
+                  <div className="px-8">
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </div>
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
-                <AccordionTrigger>Is it styled?</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex">
+                    <MdOutlinePayment className="h-8 w-8 text-primary-600 mr-4" />
+                    <div className="text-left">
+                      <h3 className="text-lg font-latoBold">
+                        PAYMENT INFORMATION
+                      </h3>
+                      <h2>Cash, CBE, telebirr, Awash Bank, ...</h2>
+                    </div>
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
-                  Yes. It comes with default styles that matches the other
-                  components&apos; aesthetic.
+                  <div className="px-8">
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </div>
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger>Is it animated?</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex">
+                    <TbTruckDelivery className="h-8 w-8 text-primary-600 mr-4" />
+                    <div className="text-left">
+                      <h3 className="text-lg font-latoBold">
+                        DELIVERY INFORMATION
+                      </h3>
+                      <h2>Free Delivery</h2>
+                    </div>
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
-                  Yes. It&apos;s animated by default, but you can disable it if
-                  you prefer.
+                  <div className="px-8">
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-4">
+                <AccordionTrigger>
+                  <div className="flex">
+                    <FaExchangeAlt className="h-8 w-8 text-primary-600 mr-4" />
+                    <div className="text-left">
+                      <h3 className="text-lg font-latoBold">
+                        INFORMATION IN EXCHANGE & RETURN
+                      </h3>
+                      <h2>Free Delivery</h2>
+                    </div>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="px-8">
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -190,32 +279,29 @@ export default function Page({ params }: { params: { id: string } }) {
       </div>
 
       {/* Related Products */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 px-4">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            <Image
-              src={service.imageUrl}
-              alt={service.title}
-              className="w-full h-64 object-cover"
-              width={500}
-              height={300}
-            />
-            <div className="flex text-left">
-              <div className="p-2 w-full">
-                <h4 className="text-lg font-semibold text-gray-800">
-                  {service.title}
-                </h4>
-                <p className="text-gray-600 mt-2">{service.description}</p>
-              </div>
-              <div className="w-auto p-4 flex items-center">
-                <span>{service.icon}</span>
-              </div>
-            </div>
-          </div>
-        ))}
+      <div className="mx-auto py-12 px-6 sm:px-16">
+        <div className="w-full h-full z-10 flex justify-center items-center">
+          <h1 className="text-3xl font-bold text-center leading-normal font-playfair">
+            IT MIGHT ALSO INTEREST YOU
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 px-4">
+          {popularProduct &&
+            popularProduct.map((product: Product) => (
+              <ProductCard
+                params={{ locale: "en" }}
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                title_am={product.title_am}
+                description={product.description}
+                description_am={product.description_am}
+                image={product.images[0]}
+                views={product.views}
+                likes={product.likes}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
