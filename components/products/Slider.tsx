@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";

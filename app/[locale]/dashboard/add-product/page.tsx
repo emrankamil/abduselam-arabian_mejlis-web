@@ -145,6 +145,7 @@ const AddProduct = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(productData),
+        cache: "no-store",
       });
 
       // If successful, show success message

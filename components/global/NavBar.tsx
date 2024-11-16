@@ -162,7 +162,7 @@ const NavBar = () => {
             {/* <Link href={"/account"} className="hidden sm:block">
               <LiaUser fontSize={27} fontWeight={400} />
             </Link> */}
-            <Link href={"#"} className="hidden sm:block">
+            <Link href={"/shops"} className="hidden sm:block">
               <MdOutlineLocationOn fontSize={23} />
             </Link>
             <LanguageChanger />
@@ -191,7 +191,7 @@ const NavBar = () => {
             {t("common:about_us")}
           </Link>
           <Link
-            href={"#"}
+            href={"/shops"}
             className="block px-3 py-2 text-base flex items-center justify-center"
           >
             <MdOutlineLocationOn fontSize={23} />

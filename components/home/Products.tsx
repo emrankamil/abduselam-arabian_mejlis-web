@@ -10,10 +10,10 @@ import { categories } from "@/data/categoriesData";
 
 const products: { [key: string]: string[] } = {
   Popular: [
-    "/products/popular-2.jpg",
+    "/products/new-popular.jpg",
     "/products/popular-1.png",
-    "/products/popular-3.jpg",
-    "/products/popular-2.png",
+    "/products/new-popular-1.jpg",
+    "/products/new-popular-curtain.jpg",
   ],
   "Arabian Majlis": [
     "/products/arabian-mejlis-03.jpg",
