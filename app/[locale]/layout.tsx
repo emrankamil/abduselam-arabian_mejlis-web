@@ -10,6 +10,7 @@ import TranslationsProvider from "@/components/global/TranslationsProvider";
 import BecomeFamily from "@/components/global/BecomeFamily";
 import Footer from "@/components/global/Footer";
 import ChatWidget from "@/components/global/ToggleChat";
+import SessionWrapper from "@/components/global/SessionWrapper";
 
 const playfair = localFont({
   src: "../fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf",
@@ -56,21 +57,23 @@ export default async function RootLayout({
         locale={locale}
         resources={resources}
       >
-        <body
-          className={`${latoBold.variable} ${latoRegular.variable} ${playfair.variable} antialiased font-sans bg-background`}
-        >
-          <div className="">
-            <NavBar />
-            {children}
-            <ChatWidget />
-            <BecomeFamily
-              params={{
-                locale: locale,
-              }}
-            />
-            <Footer />
-          </div>
-        </body>
+        <SessionWrapper>
+          <body
+            className={`${latoBold.variable} ${latoRegular.variable} ${playfair.variable} antialiased font-sans bg-background`}
+          >
+            <div className="">
+              <NavBar />
+              {children}
+              <ChatWidget />
+              <BecomeFamily
+                params={{
+                  locale: locale,
+                }}
+              />
+              <Footer />
+            </div>
+          </body>
+        </SessionWrapper>
       </TranslationsProvider>
     </html>
   );

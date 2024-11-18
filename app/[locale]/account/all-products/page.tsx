@@ -4,6 +4,11 @@ import { Product } from "@/types/productType";
 import ProductsTab from "@/components/products/ProductsTab";
 import { FetchFunction } from "@/api/FetchFunction";
 import initTranslations from "@/app/i18n";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+import { MdHome } from "react-icons/md";
+import Link from "next/link";
 
 const getProductsData = async (searchParams: {
   page: string;
@@ -12,6 +17,12 @@ const getProductsData = async (searchParams: {
   sort?: boolean;
   q?: string;
 }) => {
+  const session = await getServerSession(authOptions);
+  // console.log("next auth session", session);
+  if (!session || session.user.userType != "ADMIN") {
+    redirect("/account");
+  }
+
   const currentPage = searchParams.page;
   const tag = searchParams.tag;
   const category = searchParams.category;
@@ -99,6 +110,17 @@ const ProductList: React.FC<{
               {t("header")}
             </h1>
           </div>
+        </div>
+        {/* Breadcum */}
+        <div className="flex text-gray-800 dark:text-gray-300 max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center text-blue-500">
+            <MdHome />
+            <Link href="/account" className="mx-2">
+              Account
+            </Link>
+          </div>
+          {">"}
+          <p className="mx-2">All Products</p>
         </div>
         <div className="w-full px-2 sm:px-4 lg:px-8 xl:px-16">
           <ProductsTab />
@@ -230,7 +252,7 @@ const ProductList: React.FC<{
                 image={product.images[0]}
                 views={product.views}
                 likes={product.likes}
-                admin={false}
+                admin={true}
               />
             ))}
         </div>

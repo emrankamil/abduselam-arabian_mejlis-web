@@ -6,6 +6,7 @@ import LanguageChanger from "./LanguageChanger";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { LiaUser } from "react-icons/lia";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -159,9 +160,9 @@ const NavBar = () => {
           </div>
 
           <div className="flex items-center px-2 space-x-4 ">
-            {/* <Link href={"/account"} className="hidden sm:block">
+            <Link href={"/account"} className="hidden sm:block">
               <LiaUser fontSize={27} fontWeight={400} />
-            </Link> */}
+            </Link>
             <Link href={"/shops"} className="hidden sm:block">
               <MdOutlineLocationOn fontSize={23} />
             </Link>
@@ -197,12 +198,12 @@ const NavBar = () => {
             <MdOutlineLocationOn fontSize={23} />
             Our Shops
           </Link>
-          {/* <Link
+          <Link
             href={"/account"}
             className="block px-3 py-2 text-base flex items-center justify-center"
           >
             <LiaUser fontSize={27} fontWeight={400} /> Account
-          </Link> */}
+          </Link>
         </div>
       </div>
     </div>

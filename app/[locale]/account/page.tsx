@@ -1,26 +1,59 @@
 import React from "react";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import Link from "next/link";
+import Auth from "@/components/account/auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/options";
+import { BiSolidDashboard } from "react-icons/bi";
+import { CiShoppingCart } from "react-icons/ci";
+import { PiFolderOpenFill } from "react-icons/pi";
+import { MdOutlineManageAccounts } from "react-icons/md";
+import { LuLogOut } from "react-icons/lu";
+
+const UserMenuItems = [
+  { label: "Account", href: "/account", icon: <BiSolidDashboard /> },
+  { label: "Orders", href: "/account/orders", icon: <CiShoppingCart /> },
+  { label: "My Saves", href: "/account/my-saves", icon: <PiFolderOpenFill /> },
+  {
+    label: "Account details",
+    href: "/account-details",
+    icon: <MdOutlineManageAccounts />,
+  },
+  {
+    label: "Log out",
+    href: "/api/auth/signout?callbackUrl=/account",
+    icon: <LuLogOut />,
+  },
+];
+
+const AdminMenuItems = [
+  { label: "Account", href: "/account", icon: <BiSolidDashboard /> },
+  {
+    label: "Add Products",
+    href: "/account/add-products",
+    icon: <CiShoppingCart />,
+  },
+  {
+    label: "All Products",
+    href: "/account/all-products",
+    icon: <PiFolderOpenFill />,
+  },
+  {
+    label: "Chat",
+    href: "/account/chat",
+    icon: <MdOutlineManageAccounts />,
+  },
+  {
+    label: "Log out",
+    href: "/api/auth/signout?callbackUrl=/account",
+    icon: <LuLogOut />,
+  },
+];
 
 const Page = async () => {
-  return (
-    <div className="mt-48 px-24">
-      <a href="/">
-        <h1>Return to Home</h1>
-      </a>
-      <div className="mt-8 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
-        <p className="font-bold">Coming Soon</p>
-        <p>This page will be available soon. Stay tuned!</p>
-      </div>
-    </div>
-  );
-  // Simulate session data with user name and their saved items/orders
-  const session = await auth();
-
+  const session = await getServerSession(authOptions);
+  // console.log("next auth session", session);
   if (!session) {
-    redirect("/api/auth/signin");
-    return null;
+    return <Auth />;
   }
 
   return (
@@ -34,50 +67,46 @@ const Page = async () => {
           </h1>
         </div>
       </div>
-
       {/* Account Details */}
-      <div className="w-4/5 px-24">
-        <p className="text-lg mb-8">Welcome back, {session?.user?.name}!</p>
-        <Link href="/api/auth/signout?callbackUrl=/">Sign Out</Link>
+      <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-8 lg:gap-12 px-6 md:px-24">
+        {/* Sidebar */}
+        <div className="lg:w-1/4 gap-6 border-r border-gray-200 pr-4 md:pr-6 lg:pr-8">
+          {(session.user.userType === "USER"
+            ? UserMenuItems
+            : AdminMenuItems
+          ).map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="flex items-center  font-medium  hover:text-primary space-x-3 md:space-x-4 py-3 border-y border-gray-200"
+            >
+              <span className="text-xl md:text-2xl">{item.icon}</span>
+              <span className="text-base md:text-lg">{item.label}</span>
+            </Link>
+          ))}
+        </div>
 
-        {/* Saved Items Section */}
-        {/* <section className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Saved Items</h2>
-          {savedItems.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {savedItems.map((item) => (
-                <div key={item.id} className="border p-4 rounded-lg shadow">
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-gray-600">${item.price.toFixed(2)}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>You have no saved items.</p>
-          )}
-        </section> */}
-
-        {/* Orders Section */}
-        {/* <section>
-          <h2 className="text-xl font-semibold mb-4">Your Orders</h2>
-          {orders.length > 0 ? (
-            <div className="border-t border-gray-300 pt-4">
-              {orders.map((order) => (
-                <div key={order.id} className="border-b py-4">
-                  <p className="font-semibold">Order #{order.id}</p>
-                  <p>Date: {order.date}</p>
-                  <p>Total: ${order.total.toFixed(2)}</p>
-                  <p>
-                    Status:{" "}
-                    <span className="text-blue-500">{order.status}</span>
-                  </p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>You have no orders yet.</p>
-          )}
-        </section> */}
+        {/* Content */}
+        <div className="lg:w-3/4 px-4 md:px-6 lg:px-8">
+          <h2 className="text-lg md:text-xl font-bold">
+            Hello <span className="text-primary/80">emranhi001</span>{" "}
+            <span className=" md:text-base ">
+              (not <span className="text-black">emranhi001?</span>{" "}
+              <Link
+                href="/api/auth/signout?callbackUrl=/account"
+                className="text-primary/80"
+              >
+                Log out
+              </Link>
+              )
+            </span>
+          </h2>
+          <p className=" mt-2  md:text-base">
+            From your account dashboard you can view your recent orders , manage
+            your shipping and billing addresses , and edit your password and
+            account details .
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -88,9 +117,8 @@ export default Page;
 // function SignOut() {
 //   return (
 //     <form
-//       action={async () => {
-//         "use server";
-//         await signOut();
+//       action={() => {
+//         signOut();
 //       }}
 //     >
 //       <button type="submit">Sign out</button>

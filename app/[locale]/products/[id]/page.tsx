@@ -90,7 +90,7 @@ export default function Page({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        <div className="mx-auto py-6 px-4 ">
+        <div className="mx-auto py-6 px-4 w-[48px] h-[48px]">
           <LoadingSpinner />
         </div>
       </div>
@@ -299,6 +299,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 image={product.images[0]}
                 views={product.views}
                 likes={product.likes}
+                admin={false}
               />
             ))}
         </div>

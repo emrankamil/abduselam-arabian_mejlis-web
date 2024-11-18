@@ -10,13 +10,18 @@ interface ProductCardProps {
   image: string;
   views: number;
   likes: number;
+  admin: boolean;
 }
 import { TbEyeFilled } from "react-icons/tb";
 import { BiSolidLike } from "react-icons/bi";
 import { PiFolderOpenFill } from "react-icons/pi";
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import Button from "../global/Button";
 
 const ProductCard: React.FC<ProductCardProps> = ({
   params: { locale },
@@ -28,6 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   image,
   views,
   likes,
+  admin = false,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [productLikes, setProductLikes] = useState(likes);
@@ -52,8 +58,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
   //   fetchProduct();
   // }, [id]);
 
+  const handleDelete = () => {
+    fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          alert("Error deleting product");
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert("Product deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting product:", error);
+        alert("Error deleting product");
+      });
+  };
+
   const handleLikeToggle = () => {
-    console.log("handleLikeToggle");
     if (isLiked) {
       handleUnlike(id);
     } else {
@@ -130,6 +154,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <p className="text-sm text-gray-900">
           {locale == "en" ? description : description_am}
         </p>
+        {admin && (
+          <div className="flex gap-2 px-2 py-2">
+            <Button
+              size="small"
+              variant="danger"
+              className="flex items-center gap-2"
+              onClick={handleDelete}
+            >
+              <MdDelete />
+              <h1>Delete</h1>
+            </Button>
+            <Button size="small" className="flex items-center gap-2">
+              <FaRegEdit />
+              <h1>Update</h1>
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

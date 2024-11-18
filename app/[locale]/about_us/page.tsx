@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { IoIosCheckmark } from "react-icons/io";
 import { services, stats } from "@/data/aboutus";
 import initTranslations from "@/app/i18n";
+import Button from "@/components/global/Button";
 
 const AboutUs = async ({
   params: { locale },
@@ -25,7 +26,7 @@ const AboutUs = async ({
 
       {/* hero */}
 
-      <h1 className="text-xl sm:text-2xl md:text-4xl font-bold leading-snug md:leading-tight text-center md:hidden">
+      <h1 className="text-xl sm:text-2xl md:text-4xl font-bold leading-snug md:leading-tight text-center md:hidden sm:my-8">
         Creating Inspiring Products
         <br /> Discover Premier Furniture
         <br /> Design Experts
@@ -44,7 +45,7 @@ const AboutUs = async ({
 
         {/* hero text */}
         <div className="w-full md:w-1/2 space-y-3 sm:space-y-4 md:space-y-6">
-          <h1 className="text-gray-500 text-xs sm:text-sm md:text-lg -mb-1 sm:-mb-2 md:-mb-6 hidden md:block">
+          <h1 className=" text-xs sm:text-sm md:text-lg hidden md:block">
             {t("about_company")}
           </h1>
 
@@ -52,7 +53,7 @@ const AboutUs = async ({
             {t("title")}
           </h1>
 
-          <p className="text-gray-700 text-xs sm:text-sm md:text-base leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base leading-relaxed">
             {t("detail")}
           </p>
 
@@ -68,26 +69,26 @@ const AboutUs = async ({
             <div className="flex flex-col space-y-1 sm:space-y-2">
               {/* Three text points with icons */}
               <div className="flex items-center">
-                <span className="font-light text-gray-500">
+                <span className="font-light">
                   <IoIosCheckmark />
                 </span>
-                <p className="ml-2 text-gray-700 text-xs sm:text-sm md:text-base">
+                <p className="ml-2 text-xs sm:text-sm md:text-base">
                   {t("feature1")}
                 </p>
               </div>
               <div className="flex items-center">
-                <span className="font-light text-gray-500">
+                <span className="font-light">
                   <IoIosCheckmark />
                 </span>
-                <p className="ml-2 text-gray-700 text-xs sm:text-sm md:text-base">
+                <p className="ml-2 text-xs sm:text-sm md:text-base">
                   {t("feature2")}
                 </p>
               </div>
               <div className="flex items-center">
-                <span className="font-light text-gray-500">
+                <span className="font-light">
                   <IoIosCheckmark />
                 </span>
-                <p className="ml-2 text-gray-700 text-xs sm:text-sm md:text-base">
+                <p className="ml-2 text-xs sm:text-sm md:text-base">
                   {t("feature3")}
                 </p>
               </div>
@@ -95,18 +96,75 @@ const AboutUs = async ({
           </div>
 
           {/* Call Us Now button */}
-          <Button
-            variant="outline"
-            className="px-3 py-2 sm:px-4 sm:py-3 lg:px-7 lg:py-6 w-full sm:w-48 text-white rounded font-semibold bg-primary/90 transition duration-300"
-          >
-            {t("lets_talk")}
-          </Button>
+
+          <Button size="medium">{t("lets_talk")}</Button>
         </div>
       </div>
+      {/* features section */}
+      {/* <div className="text-center py-8 px-2 md:px-12">
+        <h2 className="text-2xl font-semibold font-playfair max-w-sm mx-auto">
+          {t("features_title")}
+        </h2>
+
+        <div className="">
+          <div className="flex justify-between w-full">
+            <div>
+              <InfoCard
+                title="Quality Craftmanship"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed "
+              />
+            </div>
+            <div>
+              <InfoCard
+                title="Quality Craftmanship"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed "
+              />
+            </div>
+          </div>
+          <div className="flex justify-between items-center w-full">
+            <div className="hidden md:block">
+              <InfoCard
+                title="Quality Craftmanship"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed "
+              />
+            </div>
+            <div className="w-auto h-96">
+              <Image
+                className="w-full h-full"
+                src={"/about_us/sofa-imagesvg.png"}
+                alt={""}
+                width={1000}
+                height={1000}
+              />
+            </div>
+
+            <div className="hidden md:block">
+              <InfoCard
+                title="Quality Craftmanship"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed "
+              />
+            </div>
+          </div>
+          <div className="flex justify-between w-full">
+            <div>
+              <InfoCard
+                title="Quality Craftmanship"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed "
+              />
+            </div>
+            <div>
+              <InfoCard
+                title="Quality Craftmanship"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed "
+              />
+            </div>
+          </div>
+        </div>
+      </div> */}
 
       {/* Services */}
       <div className="text-center py-8 px-2 md:px-12">
-        <h2 className="text-2xl font-semibold text-gray-800">{t("offer")}</h2>
+        <h2 className="text-2xl font-semibold font-playfair ">{t("offer")}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 px-4">
           {services.map((service, index) => (
@@ -123,10 +181,8 @@ const AboutUs = async ({
               />
               <div className="flex text-left">
                 <div className="p-2 w-full">
-                  <h4 className="text-lg font-semibold text-gray-800">
-                    {service.title}
-                  </h4>
-                  <p className="text-gray-600 mt-2">{service.description}</p>
+                  <h4 className="text-lg font-semibold">{service.title}</h4>
+                  <p className=" mt-2">{service.description}</p>
                 </div>
                 <div className="w-auto p-4 flex items-center">
                   <span>{service.icon}</span>
@@ -165,3 +221,30 @@ const AboutUs = async ({
 };
 
 export default AboutUs;
+
+// const InfoCard = ({
+//   title,
+//   description,
+// }: {
+//   title: string;
+//   description: string;
+// }) => {
+//   return (
+//     <div className="relative flex items-start gap-4 max-w-sm">
+//       {/* Icon or Decoration */}
+//       <div className="absolute top-0 right-0">
+//         <Image
+//           src={"/about_us/elipse.svg"}
+//           alt="elipse"
+//           width={35}
+//           height={35}
+//         />
+//       </div>
+//       {/* Content */}
+//       <div>
+//         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+//         <p className="text-sm text-gray-600 mt-1">{description}</p>
+//       </div>
+//     </div>
+//   );
+// };

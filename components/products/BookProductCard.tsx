@@ -67,7 +67,6 @@ const BookingFormModal = ({
       });
 
       const data = await response.json();
-      console.log("data", data);
       if (data.success) {
         showResult(true);
       } else {
