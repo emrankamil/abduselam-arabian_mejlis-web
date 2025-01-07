@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Auth from "@/components/account/auth";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/options";
+import { authOptions } from "../api/auth/[...nextauth]/options";
 import { BiSolidDashboard } from "react-icons/bi";
 import { CiShoppingCart } from "react-icons/ci";
 import { PiFolderOpenFill } from "react-icons/pi";

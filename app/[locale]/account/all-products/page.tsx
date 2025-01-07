@@ -5,7 +5,7 @@ import ProductsTab from "@/components/products/ProductsTab";
 import { FetchFunction } from "@/api/FetchFunction";
 import initTranslations from "@/app/i18n";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { authOptions } from "@/app/[locale]/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { MdHome } from "react-icons/md";
 import Link from "next/link";
