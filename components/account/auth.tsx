@@ -1,12 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "../global/Button";
-import { getCsrfToken, getSession, signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 
 const Auth: React.FC = () => {
-  const [csrfToken, setCsrfToken] = useState<string | null>(null);
+  // const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -18,13 +18,13 @@ const Auth: React.FC = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      const token = await getCsrfToken();
-      setCsrfToken(token || null);
-    };
-    fetchCsrfToken();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCsrfToken = async () => {
+  //     const token = await getCsrfToken();
+  //     setCsrfToken(token || null);
+  //   };
+  //   fetchCsrfToken();
+  // }, []);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,19 +38,19 @@ const Auth: React.FC = () => {
       callbackUrl: "/account",
       email,
       password,
-      csrfToken,
+      // csrfToken,
     });
-
     if (result?.error) {
       setLoginError(
         "The email/password you entered is incorrect. Verify your credentials or try registering before loging in."
       );
-    } else {
-      const session = await getSession();
-      if (session) {
-        router.push("/account");
-      }
     }
+    // else {
+    //   const session = await getSession();
+    //   if (session) {
+    //     router.push("/account");
+    //   }
+    // }
     setLoading(false);
   };
 
@@ -73,7 +73,6 @@ const Auth: React.FC = () => {
         "Content-Type": "application/json",
       },
     });
-
     if (res.status === 409) {
       setRegsiterError("User already exists");
       setLoading(false);
@@ -86,7 +85,7 @@ const Auth: React.FC = () => {
       callbackUrl: "/account",
       email: registerEmail,
       password: process.env.NEXT_PUBLIC_TEMP_PASSWORD,
-      csrfToken,
+      // csrfToken,
     });
 
     if (result?.error) {

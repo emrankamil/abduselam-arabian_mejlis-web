@@ -101,7 +101,7 @@ const AboutUs = async ({
         </div>
       </div>
       {/* features section */}
-      {/* <div className="text-center py-8 px-2 md:px-12">
+      <div className="text-center py-8 px-2 md:px-12">
         <h2 className="text-2xl font-semibold font-playfair max-w-sm mx-auto">
           {t("features_title")}
         </h2>
@@ -160,7 +160,7 @@ const AboutUs = async ({
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Services */}
       <div className="text-center py-8 px-2 md:px-12">
@@ -222,29 +222,29 @@ const AboutUs = async ({
 
 export default AboutUs;
 
-// const InfoCard = ({
-//   title,
-//   description,
-// }: {
-//   title: string;
-//   description: string;
-// }) => {
-//   return (
-//     <div className="relative flex items-start gap-4 max-w-sm">
-//       {/* Icon or Decoration */}
-//       <div className="absolute top-0 right-0">
-//         <Image
-//           src={"/about_us/elipse.svg"}
-//           alt="elipse"
-//           width={35}
-//           height={35}
-//         />
-//       </div>
-//       {/* Content */}
-//       <div>
-//         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-//         <p className="text-sm text-gray-600 mt-1">{description}</p>
-//       </div>
-//     </div>
-//   );
-// };
+const InfoCard = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
+  return (
+    <div className="relative flex items-start gap-4 max-w-sm">
+      {/* Icon or Decoration */}
+      <div className="absolute top-0 right-0">
+        <Image
+          src={"/about_us/elipse.svg"}
+          alt="elipse"
+          width={35}
+          height={35}
+        />
+      </div>
+      {/* Content */}
+      <div>
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        <p className="text-sm text-gray-600 mt-1">{description}</p>
+      </div>
+    </div>
+  );
+};

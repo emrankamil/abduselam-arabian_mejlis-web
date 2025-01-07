@@ -54,26 +54,27 @@ export const authOptions: NextAuthOptions = {
             },
           });
           // console.log(res);
-          if (res.status === 401) {
-            throw new Error("The email/password you entered is incorrect."); // Unauthorized
-          }
+          // if (res.status === 401) {
+          //   throw new Error("The email/password you entered is incorrect."); // Unauthorized
+          // }
 
-          if (res.status === 404) {
-            throw new Error(
-              "User with this email does not exist. Please Signup"
-            ); // Not found
-          }
-          if (res.status !== 200) {
-            throw new Error("Please try again.");
-          }
+          // if (res.status === 404) {
+          //   throw new Error(
+          //     "User with this email does not exist. Please Signup"
+          //   ); // Not found
+          // }
+          // if (res.status !== 200) {
+          //   throw new Error("Please try again.");
+          // }
 
-          const user = await res.json();
-
-          if (res.ok && user) {
+          if (res.ok) {
+            const user = await res.json();
             return user;
           }
+          return null;
         } catch (error) {
-          throw error;
+          // throw error;
+          return null;
           // if (error instanceof Error) {
           //   throw new Error(error.message || "An unexpected error occurred");
           // } else {
@@ -98,6 +99,7 @@ export const authOptions: NextAuthOptions = {
         const decodedToken = JSON.parse(
           Buffer.from(user.data.accessToken.split(".")[1], "base64").toString()
         );
+        // console.log("decoded", decodedToken);
         token.email = decodedToken.Email;
         token.userType = decodedToken.User_type;
         token.userId = decodedToken.User_id;

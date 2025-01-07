@@ -51,7 +51,6 @@ const AdminMenuItems = [
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
-  // console.log("next auth session", session);
   if (!session) {
     return <Auth />;
   }
@@ -89,9 +88,15 @@ const Page = async () => {
         {/* Content */}
         <div className="lg:w-3/4 px-4 md:px-6 lg:px-8">
           <h2 className="text-lg md:text-xl font-bold">
-            Hello <span className="text-primary/80">emranhi001</span>{" "}
+            Hello{" "}
+            <span className="text-primary/80">
+              {session.user.name ?? session.user.email}
+            </span>{" "}
             <span className=" md:text-base ">
-              (not <span className="text-black">emranhi001?</span>{" "}
+              (not{" "}
+              <span className="text-black">
+                {session.user.name ?? session.user.email}?
+              </span>{" "}
               <Link
                 href="/api/auth/signout?callbackUrl=/account"
                 className="text-primary/80"
