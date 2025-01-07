@@ -44,13 +44,12 @@ const Auth: React.FC = () => {
       setLoginError(
         "The email/password you entered is incorrect. Verify your credentials or try registering before loging in."
       );
+    } else {
+      const session = await getSession();
+      if (session) {
+        router.push("/account");
+      }
     }
-    // else {
-    //   const session = await getSession();
-    //   if (session) {
-    //     router.push("/account");
-    //   }
-    // }
     setLoading(false);
   };
 
