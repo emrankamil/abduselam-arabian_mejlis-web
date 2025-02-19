@@ -83,7 +83,7 @@ const Page = async () => {
           {(session.User_type === "USER" ? UserMenuItems : AdminMenuItems).map(
             (item) =>
               item.label == "Log out" ? (
-                <LogOutPopover />
+                <LogOutPopover key={item.label} />
               ) : (
                 <Link
                   key={item.label}

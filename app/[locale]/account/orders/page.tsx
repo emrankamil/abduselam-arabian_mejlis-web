@@ -68,7 +68,7 @@ const Orders = () => {
     };
 
     fetchOrders();
-  }, [session]);
+  }, [session, router, isLoading]);
 
   const handleDelete = (id: string) => {
     setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
