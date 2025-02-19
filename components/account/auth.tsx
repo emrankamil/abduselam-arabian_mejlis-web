@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "../global/Button";
 import { getSession, signIn } from "next-auth/react";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import { login } from "@/lib";
 
 const Auth: React.FC = () => {
   // const [csrfToken, setCsrfToken] = useState<string | null>(null);
@@ -31,25 +32,31 @@ const Auth: React.FC = () => {
     setLoginError(null);
     setLoading(true);
 
-    // Sign in with next-auth credentials provider
-
-    const result = await signIn("credentials", {
-      redirect: false,
-      callbackUrl: "/account",
-      email,
-      password,
-      // csrfToken,
-    });
-    if (result?.error) {
+    const result = await login({ email, password });
+    if (!result) {
       setLoginError(
         "The email/password you entered is incorrect. Verify your credentials or try registering before loging in."
       );
     } else {
-      const session = await getSession();
-      if (session) {
-        router.push("/account");
-      }
+      router.push("/account");
     }
+    // const result = await signIn("credentials", {
+    //   redirect: false,
+    //   callbackUrl: "/account",
+    //   email,
+    //   password,
+    //   // csrfToken,
+    // });
+    // if (result?.error) {
+    //   setLoginError(
+    //     "The email/password you entered is incorrect. Verify your credentials or try registering before loging in."
+    //   );
+    // } else {
+    //   const session = await getSession();
+    //   if (session) {
+    //     router.push("/account");
+    //   }
+    // }
     setLoading(false);
   };
 

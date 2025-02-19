@@ -4,11 +4,10 @@ import { Product } from "@/types/productType";
 import ProductsTab from "@/components/products/ProductsTab";
 import { FetchFunction } from "@/api/FetchFunction";
 import initTranslations from "@/app/i18n";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/[locale]/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { MdHome } from "react-icons/md";
 import Link from "next/link";
+import { getSession } from "@/lib";
 
 const getProductsData = async (searchParams: {
   page: string;
@@ -17,7 +16,7 @@ const getProductsData = async (searchParams: {
   sort?: boolean;
   q?: string;
 }) => {
-  const session = await getServerSession(authOptions);
+  const session = await getSession();
   // console.log("next auth session", session);
   if (!session || session.user.userType != "ADMIN") {
     redirect("/account");

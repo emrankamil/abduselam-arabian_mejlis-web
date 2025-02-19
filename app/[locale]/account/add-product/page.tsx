@@ -4,12 +4,11 @@ import React, { useEffect, useState } from "react";
 import { MdHome } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/global/LoadingSpinner";
+import { Session } from "@/types/sessionType";
 
 const AddProduct = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
 
   const [images, setImages] = useState<File[]>([]);
@@ -18,6 +17,8 @@ const AddProduct = () => {
   const [isImageLoading, setIsImageLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [product, setProduct] = useState({
     title: "",
@@ -33,12 +34,22 @@ const AddProduct = () => {
   });
 
   useEffect(() => {
-    if (status == "loading") return;
+    async function fetchSession() {
+      const response = await fetch("/api/session");
+      const data = await response.json();
+      setSession(data.session);
+      setIsLoading(false);
+    }
 
-    if (!session || session.user.userType !== "ADMIN") {
+    fetchSession();
+  }, []);
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!session || session.User_type !== "ADMIN") {
       router.push("/account");
     }
-  }, [session, status]);
+  }, [session, isLoading, router]);
 
   const handleCloseOverlay = () => {
     setIsSuccess(false);
@@ -193,7 +204,7 @@ const AddProduct = () => {
         {">"}
         <p className="mx-2">Add Product</p>
       </div>
-      {status == "loading" ? (
+      {isLoading ? (
         <div className="text-center m-10 w-[48px] h-[48px]">
           <LoadingSpinner />
         </div>

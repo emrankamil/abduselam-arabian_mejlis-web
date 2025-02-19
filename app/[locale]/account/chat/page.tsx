@@ -1,20 +1,11 @@
 "use client";
 
 import React from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const Chats = () => {
   // const [selectedChat, setSelectedChat] = useState<UserType | undefined>(
   //   undefined
   // );
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  if (!session || session.user.userType !== "ADMIN") {
-    router.push("/account");
-    return;
-  }
 
   // const handleSelect = (user: UserType) => setSelectedChat(user);
 

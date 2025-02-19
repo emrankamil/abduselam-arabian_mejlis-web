@@ -5,8 +5,9 @@ import OrderCard from "@/components/account/order_card";
 import LoadingSpinner from "@/components/global/LoadingSpinner";
 import { MdHome } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { Session } from "@/types/sessionType";
+import React from "react";
 
 interface Order {
   id: string;
@@ -22,17 +23,24 @@ interface Order {
 
 const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  // const session = {
-  //   user_id: "6501f5e95f9b256aeb59d5b3", // Replace this with your session fetching logic
-  // };
-  const { data: session, status } = useSession();
+  useEffect(() => {
+    async function fetchSession() {
+      const response = await fetch("/api/session");
+      const data = await response.json();
+      setSession(data.session);
+      setIsLoading(false);
+    }
+
+    fetchSession();
+  }, []);
 
   useEffect(() => {
     // Check for session
-    if (status === "loading") return;
+    if (isLoading) return;
 
     if (!session) {
       router.push("/account");
@@ -43,7 +51,7 @@ const Orders = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_ORIGIN}/order?user_id=${session.user.userId}`
+          `${process.env.NEXT_PUBLIC_ORIGIN}/order?user_id=${session.User_id}`
         );
 
         const data = await response.json();
@@ -55,12 +63,12 @@ const Orders = () => {
       } catch (error) {
         console.error("Error fetching orders:", error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchOrders();
-  }, [session, status]);
+  }, [session]);
 
   const handleDelete = (id: string) => {
     setOrders((prevOrders) => prevOrders.filter((order) => order.id !== id));
@@ -90,12 +98,12 @@ const Orders = () => {
       </div>
 
       {/* orders */}
-      {loading && (
+      {isLoading && (
         <div className="text-center m-10 w-[48px] h-[48px]">
           <LoadingSpinner />
         </div>
       )}
-      {!loading &&
+      {!isLoading &&
         orders.filter((order) => new Date(order.visit_date) >= new Date())
           .length === 0 && (
           <div className="mt-48 px-24">
@@ -114,7 +122,7 @@ const Orders = () => {
             </div>
           </div>
         )}
-      {!loading &&
+      {!isLoading &&
         orders.filter((order) => new Date(order.visit_date) >= new Date())
           .length > 0 && (
           <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">

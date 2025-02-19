@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Auth from "@/components/account/auth";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/options";
 import { BiSolidDashboard } from "react-icons/bi";
 import { CiShoppingCart } from "react-icons/ci";
 import { PiFolderOpenFill } from "react-icons/pi";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import { LuLogOut } from "react-icons/lu";
+import { getSession } from "@/lib";
+import { LogOutPopover } from "@/components/account/signoutPopup";
 
 const UserMenuItems = [
   { label: "Account", href: "/account", icon: <BiSolidDashboard /> },
@@ -28,8 +28,8 @@ const UserMenuItems = [
 const AdminMenuItems = [
   { label: "Account", href: "/account", icon: <BiSolidDashboard /> },
   {
-    label: "Add Products",
-    href: "/account/add-products",
+    label: "Add Product",
+    href: "/account/add-product",
     icon: <CiShoppingCart />,
   },
   {
@@ -50,10 +50,20 @@ const AdminMenuItems = [
 ];
 
 const Page = async () => {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
+  const session = await getSession();
+  // console.log("session", session);
   if (!session) {
     return <Auth />;
   }
+
+  // const session = {
+  //   User_id: "673a3a890706e487aa3cdaa5",
+  //   Name: "emran",
+  //   Email: "emranhi001@gmail.com",
+  //   User_type: "ADMIN",
+  //   exp: 1739607703,
+  // };
 
   return (
     <div className="space-y-16 h-full w-full">
@@ -70,19 +80,21 @@ const Page = async () => {
       <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-8 lg:gap-12 px-6 md:px-24">
         {/* Sidebar */}
         <div className="lg:w-1/4 gap-6 border-r border-gray-200 pr-4 md:pr-6 lg:pr-8">
-          {(session.user.userType === "USER"
-            ? UserMenuItems
-            : AdminMenuItems
-          ).map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="flex items-center  font-medium  hover:text-primary space-x-3 md:space-x-4 py-3 border-y border-gray-200"
-            >
-              <span className="text-xl md:text-2xl">{item.icon}</span>
-              <span className="text-base md:text-lg">{item.label}</span>
-            </Link>
-          ))}
+          {(session.User_type === "USER" ? UserMenuItems : AdminMenuItems).map(
+            (item) =>
+              item.label == "Log out" ? (
+                <LogOutPopover />
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="flex items-center  font-medium  hover:text-primary space-x-3 md:space-x-4 py-3 border-y border-gray-200"
+                >
+                  <span className="text-xl md:text-2xl">{item.icon}</span>
+                  <span className="text-base md:text-lg">{item.label}</span>
+                </Link>
+              )
+          )}
         </div>
 
         {/* Content */}
@@ -90,20 +102,20 @@ const Page = async () => {
           <h2 className="text-lg md:text-xl font-bold">
             Hello{" "}
             <span className="text-primary/80">
-              {session.user.name ?? session.user.email}
+              {session.Name ?? session.Email}
             </span>{" "}
             <span className=" md:text-base ">
               (not{" "}
               <span className="text-black">
-                {session.user.name ?? session.user.email}?
+                {session.Name ?? session.Email}?)
               </span>{" "}
-              <Link
+              {/* <Link
                 href="/api/auth/signout?callbackUrl=/account"
                 className="text-primary/80"
               >
                 Log out
-              </Link>
-              )
+              </Link> */}
+              <LogOutPopover />
             </span>
           </h2>
           <p className=" mt-2  md:text-base">

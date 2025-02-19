@@ -149,7 +149,7 @@ const Footer = () => {
       {/* Footer Bottom */}
       <div className="relative flex flex-col sm:flex-row justify-between items-center w-full text-center py-4 bg-black bg-opacity-50 text-sm">
         <p className=" whitespace-nowrap sm:ml-6 md:ml-16">
-          WebCore Software Design and Development©ALL RIGHTS RESERVED -{" "}
+          Bitz Software Design and Development©ALL RIGHTS RESERVED -{" "}
           {new Date().getFullYear()}
         </p>
         <div className="mt-2 md:mt-0 space-x-4 flex-nowrap sm:mr-6 md:mr-16">
