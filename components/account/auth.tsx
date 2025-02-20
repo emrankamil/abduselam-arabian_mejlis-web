@@ -1,8 +1,8 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "../global/Button";
-import { getSession, signIn } from "next-auth/react";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { login } from "@/lib";
 
@@ -19,14 +19,6 @@ const Auth: React.FC = () => {
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const fetchCsrfToken = async () => {
-  //     const token = await getCsrfToken();
-  //     setCsrfToken(token || null);
-  //   };
-  //   fetchCsrfToken();
-  // }, []);
-
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError(null);
@@ -40,23 +32,7 @@ const Auth: React.FC = () => {
     } else {
       router.push("/account");
     }
-    // const result = await signIn("credentials", {
-    //   redirect: false,
-    //   callbackUrl: "/account",
-    //   email,
-    //   password,
-    //   // csrfToken,
-    // });
-    // if (result?.error) {
-    //   setLoginError(
-    //     "The email/password you entered is incorrect. Verify your credentials or try registering before loging in."
-    //   );
-    // } else {
-    //   const session = await getSession();
-    //   if (session) {
-    //     router.push("/account");
-    //   }
-    // }
+
     setLoading(false);
   };
 
@@ -79,6 +55,7 @@ const Auth: React.FC = () => {
         "Content-Type": "application/json",
       },
     });
+
     if (res.status === 409) {
       setRegsiterError("User already exists");
       setLoading(false);
@@ -86,21 +63,14 @@ const Auth: React.FC = () => {
     }
 
     // Proceed with sign-in after registration
-    const result = await signIn("credentials", {
-      redirect: false,
-      callbackUrl: "/account",
-      email: registerEmail,
-      password: process.env.NEXT_PUBLIC_TEMP_PASSWORD,
-      // csrfToken,
+    const result = await login({
+      email,
+      password: process.env.NEXT_PUBLIC_TEMP_PASSWORD || "",
     });
-
-    if (result?.error) {
-      setRegsiterError(result.error);
+    if (!result) {
+      setLoginError("Error during registration. ");
     } else {
-      const session = await getSession();
-      if (session) {
-        router.push("/account");
-      }
+      router.push("/account");
     }
 
     setLoading(false);

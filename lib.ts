@@ -40,8 +40,10 @@ export async function login(credentials: { email: string; password: string }) {
         "Content-Type": "application/json",
       },
     });
+    console.log("response", res);
     if (res.ok) {
       const result = await res.json();
+      console.log("result", result);
       const expires = new Date(Date.now() + expiryTime * 1000);
       cookies().set("session", result.data.accessToken, {
         expires,
