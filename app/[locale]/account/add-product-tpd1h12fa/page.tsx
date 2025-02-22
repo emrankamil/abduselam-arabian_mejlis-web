@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdHome } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import LoadingSpinner from "@/components/global/LoadingSpinner";
-import { Session } from "@/types/sessionType";
+// import { useRouter } from "next/navigation";
+// import { Session } from "@/types/sessionType";
+// import LoadingSpinner from "@/components/global/LoadingSpinner";
 
 const AddProduct = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const [images, setImages] = useState<File[]>([]);
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
@@ -17,9 +17,9 @@ const AddProduct = () => {
   const [isImageLoading, setIsImageLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [session, setSession] = useState<Session | null>(null);
-  const [status, setStatus] = useState<"loading" | "authenticated">("loading");
-  const [isLoading, setIsLoading] = useState(true);
+  // const [session, setSession] = useState<Session | null>(null);
+  // const [status, setStatus] = useState<"loading" | "authenticated">("loading");
+  // const [isLoading, setIsLoading] = useState(true);
 
   const [product, setProduct] = useState({
     title: "",
@@ -34,25 +34,25 @@ const AddProduct = () => {
     tags: [""],
   });
 
-  useEffect(() => {
-    async function fetchSession() {
-      const response = await fetch("/api/session");
-      const data = await response.json();
-      setSession(data.session);
-      setStatus("authenticated");
-    }
+  // useEffect(() => {
+  //   async function fetchSession() {
+  //     const response = await fetch("/api/session");
+  //     const data = await response.json();
+  //     setSession(data.session);
+  //     setStatus("authenticated");
+  //   }
 
-    fetchSession();
-  }, []);
+  //   fetchSession();
+  // }, []);
 
-  useEffect(() => {
-    if (status === "loading") return;
-    if (!session || session.User_type !== "ADMIN") {
-      router.push("/account");
-    } else {
-      setIsLoading(false);
-    }
-  }, [session, status, router]);
+  // useEffect(() => {
+  //   if (status === "loading") return;
+  //   if (!session || session.User_type !== "ADMIN") {
+  //     router.push("/account");
+  //   } else {
+  //     setIsLoading(false);
+  //   }
+  // }, [session, status, router]);
 
   const handleCloseOverlay = () => {
     setIsSuccess(false);
@@ -185,13 +185,13 @@ const AddProduct = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="text-center m-10 w-[48px] h-[48px]">
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="text-center m-10 w-[48px] h-[48px]">
+  //       <LoadingSpinner />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="relative">
