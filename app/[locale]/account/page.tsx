@@ -14,8 +14,8 @@ const UserMenuItems = [
   { label: "Orders", href: "/account/orders", icon: <CiShoppingCart /> },
   { label: "My Saves", href: "/account/my-saves", icon: <PiFolderOpenFill /> },
   {
-    label: "Account details",
-    href: "/account-details",
+    label: "Account detail",
+    href: "/account-detail",
     icon: <MdOutlineManageAccounts />,
   },
   {
@@ -80,7 +80,7 @@ const Page = async () => {
       <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-8 lg:gap-12 px-6 md:px-24">
         {/* Sidebar */}
         <div className="lg:w-1/4 gap-6 border-r border-gray-200 pr-4 md:pr-6 lg:pr-8">
-          {(session.User_type === "USER" ? UserMenuItems : AdminMenuItems).map(
+          {(session.User_type === "ADMIN" ? AdminMenuItems : UserMenuItems).map(
             (item) =>
               item.label == "Log out" ? (
                 <LogOutPopover key={item.label} />
@@ -104,19 +104,6 @@ const Page = async () => {
             <span className="text-primary/80">
               {session.Name ?? session.Email}
             </span>{" "}
-            <span className=" md:text-base ">
-              (not{" "}
-              <span className="text-black">
-                {session.Name ?? session.Email}?)
-              </span>{" "}
-              {/* <Link
-                href="/api/auth/signout?callbackUrl=/account"
-                className="text-primary/80"
-              >
-                Log out
-              </Link> */}
-              <LogOutPopover />
-            </span>
           </h2>
           <p className=" mt-2  md:text-base">
             From your account dashboard you can view your recent orders , manage

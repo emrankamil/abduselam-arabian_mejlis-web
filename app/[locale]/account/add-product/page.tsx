@@ -18,6 +18,7 @@ const AddProduct = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
   const [session, setSession] = useState<Session | null>(null);
+  const [status, setStatus] = useState<"loading" | "authenticated">("loading");
   const [isLoading, setIsLoading] = useState(true);
 
   const [product, setProduct] = useState({
@@ -38,18 +39,20 @@ const AddProduct = () => {
       const response = await fetch("/api/session");
       const data = await response.json();
       setSession(data.session);
-      setIsLoading(false);
+      setStatus("authenticated");
     }
 
     fetchSession();
   }, []);
 
   useEffect(() => {
-    if (isLoading) return;
+    if (status === "loading") return;
     if (!session || session.User_type !== "ADMIN") {
       router.push("/account");
+    } else {
+      setIsLoading(false);
     }
-  }, [session, isLoading, router]);
+  }, [session, status, router]);
 
   const handleCloseOverlay = () => {
     setIsSuccess(false);
@@ -182,6 +185,14 @@ const AddProduct = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="text-center m-10 w-[48px] h-[48px]">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
       <div className="relative bg-[url('/products_hero.png')] bg-cover bg-center h-[300px]">
@@ -204,223 +215,216 @@ const AddProduct = () => {
         {">"}
         <p className="mx-2">Add Product</p>
       </div>
-      {isLoading ? (
-        <div className="text-center m-10 w-[48px] h-[48px]">
-          <LoadingSpinner />
-        </div>
-      ) : (
-        <div className="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
-          {/* Form for product information */}
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          <h3 className="text-primary text-xl font-semibold mb-4">
-            Upload Product Information
-          </h3>
-          {/* image Upload form */}
-          <div className="py-6">
-            <label className="text-sm font-medium text-gray-700">
-              Upload Images
-            </label>
 
-            <form onSubmit={handleOnImageSubmit} className="mt-2">
-              <input
-                type="file"
-                multiple
-                onChange={handleFileChange}
-                className="block w-full p-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary mb-4"
-              />
-              <button
-                type="submit"
-                className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-opacity-50"
-              >
-                Upload Selected Images
-              </button>
-            </form>
+      <div className="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+        {/* Form for product information */}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <h3 className="text-primary text-xl font-semibold mb-4">
+          Upload Product Information
+        </h3>
+        {/* image Upload form */}
+        <div className="py-6">
+          <label className="text-sm font-medium text-gray-700">
+            Upload Images
+          </label>
 
-            {/* Display uploaded image URLs */}
-            {isImageLoading ? (
-              <div className="mt-4">
-                <p className="text-primary">
-                  Loading... Uploading images, please wait.
-                </p>
-              </div>
-            ) : (
-              uploadedUrls.length > 0 && (
-                <div className="mt-6">
-                  <h3 className="text-lg font-semibold text-primary mb-2">
-                    Uploaded Images:
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    {uploadedUrls.map((url, index) => (
-                      <Image
-                        key={index}
-                        src={url}
-                        alt={`Uploaded ${index}`}
-                        width={1000}
-                        height={1000}
-                        className="w-40 h-40 object-cover rounded-md shadow-sm"
-                      />
-                    ))}
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-
-          {/* Overlay */}
-          {/* Overlay */}
-          {(isFormLoading || isSuccess) && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-              <div className="relative w-3/4 max-w-3xl bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
-                {isFormLoading && (
-                  <div className="text-center text-xl text-primary font-semibold">
-                    Submitting... Please wait.
-                  </div>
-                )}
-                {isSuccess && (
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-green-600 mb-4">
-                      Success!
-                    </h3>
-                    <p className="text-lg text-gray-700">
-                      Your product has been successfully submitted.
-                    </p>
-                    <button
-                      onClick={handleCloseOverlay}
-                      className="mt-6 bg-primary text-white py-2 px-6 rounded-lg hover:bg-opacity-90 transition duration-300"
-                    >
-                      Close
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          {/* Product information form */}
-          <form onSubmit={handleSubmit} className="flex flex-col  space-y-4 ">
-            <label className="text-sm font-medium text-gray-700">Title</label>
+          <form onSubmit={handleOnImageSubmit} className="mt-2">
             <input
-              type="text"
-              name="title"
-              placeholder="Product Title"
-              value={product.title}
-              onChange={handleProductChange}
-              required
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              type="file"
+              multiple
+              onChange={handleFileChange}
+              className="block w-full p-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary mb-4"
             />
-
-            <label className="text-sm font-medium text-gray-700">
-              Title (Amharic)
-            </label>
-            <input
-              type="text"
-              name="title_am"
-              placeholder="Product Title (Amharic)"
-              value={product.title_am}
-              onChange={handleProductChange}
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Short Description
-            </label>
-            <textarea
-              name="description"
-              value={product.description}
-              onChange={handleProductChange}
-              required
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Short Description (Amharic)
-            </label>
-            <textarea
-              name="description_am"
-              value={product.description_am}
-              onChange={handleProductChange}
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Complete Description
-            </label>
-            <textarea
-              name="long_description"
-              value={product.long_description}
-              onChange={handleProductChange}
-              required
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Complete Description (Amharic)
-            </label>
-            <textarea
-              name="long_description_am"
-              value={product.long_description_am}
-              onChange={handleProductChange}
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Features (slash-/ separated)
-            </label>
-            <textarea
-              name="features"
-              value={product.features.join("/ ")}
-              onChange={(e) => handleArrayChange(e, "features")}
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Features - Amharic (slash-/ separated)
-            </label>
-            <textarea
-              name="features_am"
-              value={product.features_am.join("/ ")}
-              onChange={(e) => handleArrayChange(e, "features_am")}
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <label className="text-sm font-medium text-gray-700">
-              Category
-            </label>
-            <select
-              name="category"
-              value={product.category}
-              onChange={handleProductChange}
-              required
-              className="p-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              <option value="" disabled>
-                Select Category
-              </option>
-              <option value="sofa">Sofa</option>
-              <option value="arabian_mejlis">Arabian Mejlis</option>
-              <option value="curtain">Curtain</option>
-              <option value="tv_stand">Tv Stand</option>
-              <option value="bed">Bed</option>
-            </select>
-
-            <label className="text-sm font-medium text-gray-700">
-              Tags (slash-/ separated)
-            </label>
-            <input
-              type="text"
-              value={product.tags.join("/ ")}
-              onChange={(e) => handleArrayChange(e, "tags")}
-              className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
-              className="bg-primary text-white py-2 rounded-md mt-4 hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+              className="bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-opacity-50"
             >
-              Submit
+              Upload Selected Images
             </button>
           </form>
+
+          {/* Display uploaded image URLs */}
+          {isImageLoading ? (
+            <div className="mt-4">
+              <p className="text-primary">
+                Loading... Uploading images, please wait.
+              </p>
+            </div>
+          ) : (
+            uploadedUrls.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-lg font-semibold text-primary mb-2">
+                  Uploaded Images:
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {uploadedUrls.map((url, index) => (
+                    <Image
+                      key={index}
+                      src={url}
+                      alt={`Uploaded ${index}`}
+                      width={1000}
+                      height={1000}
+                      className="w-40 h-40 object-cover rounded-md shadow-sm"
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+          )}
         </div>
-      )}
+
+        {/* Overlay */}
+        {/* Overlay */}
+        {(isFormLoading || isSuccess) && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+            <div className="relative w-3/4 max-w-3xl bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
+              {isFormLoading && (
+                <div className="text-center text-xl text-primary font-semibold">
+                  Submitting... Please wait.
+                </div>
+              )}
+              {isSuccess && (
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-green-600 mb-4">
+                    Success!
+                  </h3>
+                  <p className="text-lg text-gray-700">
+                    Your product has been successfully submitted.
+                  </p>
+                  <button
+                    onClick={handleCloseOverlay}
+                    className="mt-6 bg-primary text-white py-2 px-6 rounded-lg hover:bg-opacity-90 transition duration-300"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        {/* Product information form */}
+        <form onSubmit={handleSubmit} className="flex flex-col  space-y-4 ">
+          <label className="text-sm font-medium text-gray-700">Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Product Title"
+            value={product.title}
+            onChange={handleProductChange}
+            required
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Title (Amharic)
+          </label>
+          <input
+            type="text"
+            name="title_am"
+            placeholder="Product Title (Amharic)"
+            value={product.title_am}
+            onChange={handleProductChange}
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Short Description
+          </label>
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleProductChange}
+            required
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Short Description (Amharic)
+          </label>
+          <textarea
+            name="description_am"
+            value={product.description_am}
+            onChange={handleProductChange}
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Complete Description
+          </label>
+          <textarea
+            name="long_description"
+            value={product.long_description}
+            onChange={handleProductChange}
+            required
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Complete Description (Amharic)
+          </label>
+          <textarea
+            name="long_description_am"
+            value={product.long_description_am}
+            onChange={handleProductChange}
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Features (slash-/ separated)
+          </label>
+          <textarea
+            name="features"
+            value={product.features.join("/ ")}
+            onChange={(e) => handleArrayChange(e, "features")}
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">
+            Features - Amharic (slash-/ separated)
+          </label>
+          <textarea
+            name="features_am"
+            value={product.features_am.join("/ ")}
+            onChange={(e) => handleArrayChange(e, "features_am")}
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+
+          <label className="text-sm font-medium text-gray-700">Category</label>
+          <select
+            name="category"
+            value={product.category}
+            onChange={handleProductChange}
+            required
+            className="p-2 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value="" disabled>
+              Select Category
+            </option>
+            <option value="sofa">Sofa</option>
+            <option value="arabian_mejlis">Arabian Mejlis</option>
+            <option value="curtain">Curtain</option>
+            <option value="tv_stand">Tv Stand</option>
+            <option value="bed">Bed</option>
+          </select>
+
+          <label className="text-sm font-medium text-gray-700">
+            Tags (slash-/ separated)
+          </label>
+          <input
+            type="text"
+            value={product.tags.join("/ ")}
+            onChange={(e) => handleArrayChange(e, "tags")}
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+          />
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          <button
+            type="submit"
+            className="bg-primary text-white py-2 rounded-md mt-4 hover:bg-primary-dark focus:ring-2 focus:ring-primary focus:ring-opacity-50"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

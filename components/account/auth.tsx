@@ -11,6 +11,7 @@ const Auth: React.FC = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [loginError, setLoginError] = useState<string | null>(null);
   const [registerError, setRegsiterError] = useState<string | null>(null);
@@ -44,7 +45,7 @@ const Auth: React.FC = () => {
     const body = {
       name,
       email: registerEmail,
-      password: process.env.NEXT_PUBLIC_TEMP_PASSWORD,
+      password: newPassword,
       username: registerEmail.split("@")[0].toLowerCase(),
     };
     // Perform the registration request
@@ -62,10 +63,19 @@ const Auth: React.FC = () => {
       return;
     }
 
+    if (!res.ok) {
+      setRegsiterError("Error during registration. ");
+      setLoading(false);
+      return;
+    }
+
+    const response = await res.json();
+
     // Proceed with sign-in after registration
     const result = await login({
+      accessToken: response.data.accessToken,
       email,
-      password: process.env.NEXT_PUBLIC_TEMP_PASSWORD || "",
+      password: newPassword,
     });
     if (!result) {
       setLoginError("Error during registration. ");
@@ -204,10 +214,35 @@ const Auth: React.FC = () => {
                 className="appearance-none border w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:border-primary"
                 required
               />
-              <p className="mt-2 text-gray-600">
-                A link to set a new password will be sent to your email address.
-                Please verify it before signing in next time.
-              </p>
+            </div>
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 font-bold mb-2"
+                htmlFor="password"
+              >
+                Password <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="appearance-none border w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:border-primary"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute inset-y-0 top-1/2 transform -translate-y-1/2 right-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none"
+                >
+                  {showPassword ? (
+                    <BiSolidHide size={20} />
+                  ) : (
+                    <BiSolidShow size={20} />
+                  )}
+                </button>
+              </div>
             </div>
             <div className="flex items-center justify-between">
               <Button

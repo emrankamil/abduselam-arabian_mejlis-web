@@ -28,11 +28,25 @@ export async function decrypt(input: string): Promise<any> {
   return decodedToken;
 }
 
-export async function login(credentials: { email: string; password: string }) {
+export async function login(credentials: {
+  accessToken?: string;
+  email: string;
+  password: string;
+}) {
   // Verify credentials && get the user
 
-  const { email, password } = credentials;
+  const { accessToken, email, password } = credentials;
+
   try {
+    // if signup, no need to verify the user by loging in again.
+    if (accessToken) {
+      const expires = new Date(Date.now() + expiryTime * 1000);
+      cookies().set("session", accessToken, {
+        expires,
+        httpOnly: true,
+      });
+      return accessToken;
+    }
     const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
@@ -40,10 +54,9 @@ export async function login(credentials: { email: string; password: string }) {
         "Content-Type": "application/json",
       },
     });
-    console.log("response", res);
+
     if (res.ok) {
       const result = await res.json();
-      console.log("result", result);
       const expires = new Date(Date.now() + expiryTime * 1000);
       cookies().set("session", result.data.accessToken, {
         expires,
