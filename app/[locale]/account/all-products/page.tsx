@@ -1,7 +1,5 @@
 import ProductCard from "@/components/products/ProductCard";
-import PaginationComp from "@/components/products/Pagination";
 import { Product } from "@/types/productType";
-import ProductsTab from "@/components/products/ProductsTab";
 import { FetchFunction } from "@/api/FetchFunction";
 import initTranslations from "@/app/i18n";
 import { redirect } from "next/navigation";
@@ -82,7 +80,6 @@ const ProductList: React.FC<{
 
   let isError: boolean = false;
   let products: Product[] = [];
-  let totalProducts: number = 0;
 
   try {
     const response = await getProductsData({
@@ -93,7 +90,7 @@ const ProductList: React.FC<{
       q: search,
     });
     products = response.products;
-    totalProducts = response.totalProducts;
+    // totalProducts = response.totalProducts;
   } catch (error) {
     isError = true;
   }
@@ -120,9 +117,6 @@ const ProductList: React.FC<{
           </div>
           {">"}
           <p className="mx-2">All Products</p>
-        </div>
-        <div className="w-full px-2 sm:px-4 lg:px-8 xl:px-16">
-          <ProductsTab />
         </div>
 
         {(tag || category) && (
@@ -156,9 +150,7 @@ const ProductList: React.FC<{
             </h1>
           </div>
         </div>
-        <div className="w-full px-2 sm:px-4 lg:px-8 xl:px-16">
-          <ProductsTab />
-        </div>
+
         {(tag || category) && (
           <div className="w-full px-2 sm:px-4 lg:px-8 xl:px-16">
             <div className="flex justify-between items-center">
@@ -203,9 +195,6 @@ const ProductList: React.FC<{
             {t("header")}
           </h1>
         </div>
-      </div>
-      <div className="w-full px-2 sm:px-4 lg:px-8 xl:px-16">
-        <ProductsTab />
       </div>
 
       {/* products */}
@@ -256,8 +245,6 @@ const ProductList: React.FC<{
             ))}
         </div>
       </div>
-
-      {products && <PaginationComp pages={Math.ceil(totalProducts / 10)} />}
     </section>
   );
 };

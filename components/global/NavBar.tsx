@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { LiaUser } from "react-icons/lia";
+import { Button } from "../ui/button";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -144,28 +145,58 @@ const NavBar = () => {
 
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-16">
-              <Link href="/" className=" px-1 py-2 text-lg">
+              <Button
+                variant="link"
+                onClick={() => (window.location.href = "/")}
+                className=" px-1 py-2 text-lg text-white"
+              >
                 {t("common:home")}
-              </Link>
-              <Link href="/products" className=" px-1 py-2 text-lg">
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => (window.location.href = "/products")}
+                className=" px-1 py-2 text-lg text-white"
+              >
                 {t("common:products")}
-              </Link>
-              <Link href="/contact_us" className=" px-1 py-2 text-lg">
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => (window.location.href = "/contact_us")}
+                className=" px-1 py-2 text-lg text-white"
+              >
                 {t("common:contact_us")}
-              </Link>
-              <Link href="/about_us" className=" px-1 py-2 text-lg">
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => (window.location.href = "/about_us")}
+                className=" px-1 py-2 text-lg text-white"
+              >
                 {t("common:about_us")}
-              </Link>
+              </Button>
+              {/* <Link href="/products" className=" px-1 py-2 text-lg">
+                {t("common:products")}
+              </Link> */}
             </div>
           </div>
 
           <div className="flex items-center px-2 space-x-4 ">
-            <Link href={"/account"} className="hidden sm:block">
+            <Button
+              variant="link"
+              onClick={() => (window.location.href = "/account")}
+              className=" px-1 py-2 hidden sm:block text-white"
+            >
               <LiaUser fontSize={27} fontWeight={400} />
-            </Link>
-            <Link href={"/shops"} className="hidden sm:block">
+            </Button>
+            <Button
+              variant="link"
+              onClick={() => (window.location.href = "/shops")}
+              className=" px-1 py-2 hidden sm:block text-white"
+            >
               <MdOutlineLocationOn fontSize={23} />
-            </Link>
+            </Button>
+            {/* <Link href={"/account"} className="hidden sm:block">
+              <LiaUser fontSize={27} fontWeight={400} />
+            </Link> */}
             <LanguageChanger />
           </div>
         </div>
@@ -179,31 +210,53 @@ const NavBar = () => {
         id="mobile-menu"
       >
         <div className="space-y-1 pb-3 pt-2">
-          <Link href="/" className=" block px-3 py-2 text-base">
+          <Button
+            variant="link"
+            onClick={() => (window.location.href = "/")}
+            className="w-full px-3 py-2 text-base"
+          >
             {t("common:home")}
-          </Link>
-          <Link href="/products" className=" block px-3 py-2 text-base">
+          </Button>
+
+          {/* <Link href="/" className=" block px-3 py-2 text-base">
+            {t("common:home")}
+          </Link> */}
+          <Button
+            variant="link"
+            onClick={() => (window.location.href = "/products")}
+            className="w-full px-3 py-2 text-base"
+          >
             {t("common:products")}
-          </Link>
-          <Link href="/contact_us" className=" block px-3 py-2 text-base">
+          </Button>
+          <Button
+            variant="link"
+            onClick={() => (window.location.href = "/contact_us")}
+            className="w-full px-3 py-2 text-base"
+          >
             {t("common:contact_us")}
-          </Link>
-          <Link href="/about_us" className=" block px-3 py-2 text-base">
+          </Button>
+          <Button
+            variant="link"
+            onClick={() => (window.location.href = "/about_us")}
+            className="w-full px-3 py-2 text-base"
+          >
             {t("common:about_us")}
-          </Link>
-          <Link
-            href={"/shops"}
-            className="block px-3 py-2 text-base flex items-center justify-center"
+          </Button>
+          <Button
+            variant="link"
+            onClick={() => (window.location.href = "/shops")}
+            className="w-full px-3 py-2 text-base flex items-center justify-center"
           >
             <MdOutlineLocationOn fontSize={23} />
             Our Shops
-          </Link>
-          <Link
-            href={"/account"}
-            className="block px-3 py-2 text-base flex items-center justify-center"
+          </Button>
+          <Button
+            variant="link"
+            onClick={() => (window.location.href = "/account")}
+            className="w-full px-3 py-2 text-base flex items-center justify-center"
           >
             <LiaUser fontSize={27} fontWeight={400} /> Account
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

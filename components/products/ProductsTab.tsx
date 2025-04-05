@@ -12,8 +12,9 @@ import {
 } from "@/components/ui/accordion";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
-const ProductsTab = () => {
+const ProductsTab = ({ handleSort }: { handleSort: () => void }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
   const handleSearch = async (e: { preventDefault: () => void }) => {
@@ -133,12 +134,19 @@ const ProductsTab = () => {
         />
       </form>
       {/* sort products */}
-      <Link
+      <Button
+        variant={"outline"}
+        className="w-1/5 border-2 border-sm rounded-xl px-4 flex justify-center items-center max-md:hidden py-6"
+        onClick={handleSort}
+      >
+        <span className="text-sm font-semibold">Sort</span>
+      </Button>
+      {/* <Link
         className="w-1/5 border-2 border-sm rounded-xl px-4 flex justify-center items-center max-md:hidden"
         href={`/products?sort=true`}
       >
         <span className="text-sm font-semibold">Sort</span>
-      </Link>
+      </Link> */}
     </section>
   );
 };
