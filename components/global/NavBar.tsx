@@ -146,30 +146,30 @@ const NavBar = () => {
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-16">
               <Button
-                variant="link"
+                variant="ghost"
                 onClick={() => (window.location.href = "/")}
-                className=" px-1 py-2 text-lg text-white"
+                className=" px-1 py-2 text-lg"
               >
                 {t("common:home")}
               </Button>
               <Button
-                variant="link"
+                variant="ghost"
                 onClick={() => (window.location.href = "/products")}
-                className=" px-1 py-2 text-lg text-white"
+                className=" px-1 py-2 text-lg"
               >
                 {t("common:products")}
               </Button>
               <Button
-                variant="link"
+                variant="ghost"
                 onClick={() => (window.location.href = "/contact_us")}
-                className=" px-1 py-2 text-lg text-white"
+                className=" px-1 py-2 text-lg"
               >
                 {t("common:contact_us")}
               </Button>
               <Button
-                variant="link"
+                variant="ghost"
                 onClick={() => (window.location.href = "/about_us")}
-                className=" px-1 py-2 text-lg text-white"
+                className=" px-1 py-2 text-lg"
               >
                 {t("common:about_us")}
               </Button>
@@ -181,16 +181,16 @@ const NavBar = () => {
 
           <div className="flex items-center px-2 space-x-4 ">
             <Button
-              variant="link"
+              variant="ghost"
               onClick={() => (window.location.href = "/account")}
-              className=" px-1 py-2 hidden sm:block text-white"
+              className=" px-1 py-2 hidden sm:block"
             >
               <LiaUser fontSize={27} fontWeight={400} />
             </Button>
             <Button
-              variant="link"
+              variant="ghost"
               onClick={() => (window.location.href = "/shops")}
-              className=" px-1 py-2 hidden sm:block text-white"
+              className=" px-1 py-2 hidden sm:block"
             >
               <MdOutlineLocationOn fontSize={23} />
             </Button>
@@ -211,7 +211,7 @@ const NavBar = () => {
       >
         <div className="space-y-1 pb-3 pt-2">
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => (window.location.href = "/")}
             className="w-full px-3 py-2 text-base"
           >
@@ -222,28 +222,28 @@ const NavBar = () => {
             {t("common:home")}
           </Link> */}
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => (window.location.href = "/products")}
             className="w-full px-3 py-2 text-base"
           >
             {t("common:products")}
           </Button>
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => (window.location.href = "/contact_us")}
             className="w-full px-3 py-2 text-base"
           >
             {t("common:contact_us")}
           </Button>
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => (window.location.href = "/about_us")}
             className="w-full px-3 py-2 text-base"
           >
             {t("common:about_us")}
           </Button>
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => (window.location.href = "/shops")}
             className="w-full px-3 py-2 text-base flex items-center justify-center"
           >
@@ -251,7 +251,7 @@ const NavBar = () => {
             Our Shops
           </Button>
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => (window.location.href = "/account")}
             className="w-full px-3 py-2 text-base flex items-center justify-center"
           >
